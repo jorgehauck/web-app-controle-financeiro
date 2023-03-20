@@ -1,0 +1,13 @@
+<div class="container">
+  <form (submit)="logar()">
+    <h1>Login</h1>
+    <label for="username"><b>E-mail</b></label>
+    <input [(ngModel)]="usuario.email" type="text" placeholder="E-mail" name="email">
+
+    <label for="password"><b>Senha</b></label>
+    <input [(ngModel)]="usuario.senha" type="password" placeholder="Senha" name="senha">
+
+    <button type="submit">Entrar</button>
+  </form>
+  <p>Não possui uma conta? <a [routerLink]="['novo-usuario']">Cadastre-se</a></p>
+</div>
