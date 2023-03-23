@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AutenticacaoGuard } from './guard/autenticacao.guard';
+import { LoginGuard } from './guard/login.guard';
 
 const routes: Routes = [
   {
@@ -9,11 +11,13 @@ const routes: Routes = [
   },
   {
     path: 'home',
-    loadChildren:() => import('./pages/home/home.module').then((h) => h.HomeModule)
+    loadChildren:() => import('./pages/home/home.module').then((h) => h.HomeModule),
+    canLoad: [LoginGuard]
   },
   {
     path: 'receitas',
-    loadChildren: () => import('./pages/lista-receitas/lista-receitas.module').then((l) => l.ListaReceitasModule)
+    loadChildren:() => import('./pages/lista-receitas/lista-receitas.module').then((l) => l.ListaReceitasModule),
+    canLoad: [AutenticacaoGuard]
   }
 ];
 
