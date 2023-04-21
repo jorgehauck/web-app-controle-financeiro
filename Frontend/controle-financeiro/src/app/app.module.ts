@@ -8,13 +8,12 @@ import { AutenticacaoModule } from './services/autenticacao/autenticacao.module'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { ToastrModule } from 'ngx-toastr';
-import { RodapeComponent } from './components/rodape/rodape.component'
-
+import { RodapeComponent } from './components/rodape/rodape.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    RodapeComponent,
+    RodapeComponent
   ],
   imports: [
   BrowserModule,

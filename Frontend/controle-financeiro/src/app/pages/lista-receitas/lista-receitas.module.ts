@@ -5,6 +5,7 @@ import { ListaReceitasComponent } from './lista-receitas.component';
 import { CabecalhoModule } from 'src/app/components/cabecalho/cabecalho.module';
 
 
+
 @NgModule({
   declarations: [ListaReceitasComponent],
   imports: [

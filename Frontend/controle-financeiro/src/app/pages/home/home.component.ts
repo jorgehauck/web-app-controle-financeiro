@@ -31,7 +31,7 @@ export class HomeComponent implements OnInit {
   }
 
   public logar() {
-    this.authService.autenticar(this.usuario).subscribe(() => {
+    this.authService.autenticar(this.usuario).subscribe((data) => {
       this.router.navigate(['receitas']);
     },
     (error) => {

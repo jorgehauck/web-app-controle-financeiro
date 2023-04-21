@@ -7,7 +7,6 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class CabecalhoComponent implements OnInit {
 
-
   @Input()
   public nomeUsuarioLogado: string = '';
 
