@@ -1,6 +1,18 @@
-<mat-toolbar color="primary">
-  <mat-toolbar-row>
-      <span class="example-spacer"></span>
-      <span>Seja bem vindo {{nomeUsuarioLogado}}!</span>
-  </mat-toolbar-row>
-</mat-toolbar>
+<nav class="navbar navbar-expand-lg bg-navbar p-3">
+  <div class="container-fluid">
+    <span class="navbar-brand">Seja bem vindo!</span>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-link active" aria-current="page" href="#">Receitas</a>
+        <a class="nav-link active" href="#">Despesas</a>
+        <a class="nav-link active" href="#">Gráfico Consolidado</a>
+      </div>
+    </div>
+    <div class="justify-content-end">
+      <a (click)="logout()"><img src="assets/img/logout.png" alt="logout"></a>
+    </div>
+  </div>
+</nav>

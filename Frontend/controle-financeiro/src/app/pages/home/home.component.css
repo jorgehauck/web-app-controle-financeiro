@@ -32,7 +32,7 @@ input[type=text], input[type=password] {
 }
 
 button[type=submit] {
-  background-color: #2311eb;
+  background-color: #005eff;
   color: white;
   padding: 12px 20px;
   margin: 8px 0;
@@ -43,7 +43,7 @@ button[type=submit] {
 }
 
 button[type=submit]:hover {
-  background-color: #2311eb;
+  background-color: #005eff;
 }
 
 label {
