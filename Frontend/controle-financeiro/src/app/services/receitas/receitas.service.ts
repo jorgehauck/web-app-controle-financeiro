@@ -20,4 +20,8 @@ export class ReceitasService {
   public getReceitas(): Observable<Page<Receitas>> {
     return this.httpClient.get<Page<Receitas>>(`${API}/receitas/listar`);
   }
+
+  public atualizarReceita(id: number, receita: Receitas): Observable<Receitas> {
+    return this.httpClient.put<Receitas>(`${API}/${id}`, receita);
+  }
 }

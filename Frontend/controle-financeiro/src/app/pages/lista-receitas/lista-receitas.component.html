@@ -11,17 +11,20 @@
             <th scope="col">Descrição</th>
             <th scope="col">Valor</th>
             <th scope="col">Data</th>
-            <th scope="col">Ações</th>
+            <th scope="col"></th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let item of receitas">
-            <td>{{item.descricao}}</td>
-            <td>R$ {{item.valor | number: '1.2-2'}}</td>
-            <td>{{item.data}}</td>
+            <td>{{ item.descricao }}</td>
+            <td>R$ {{ item.valor | number: '1.2-2' }}</td>
+            <td>{{ item.data }}</td>
             <td>
-              <button class="btn btn-info p-1 me-2" (click)="abrirModal()"><img src="assets/img/edit.png" alt="Editar"> Editar</button>
-              <button class="btn btn-danger p-1" (click)="abrirModalConfirmacao()"><img src="assets/img/delete.png" alt="Deletar"> Deletar</button></td>
+              <button class="btn btn-info p-1 me-2" (click)="abrirModal(item)">
+                <img src="assets/img/edit.png" alt="Editar"> Editar</button>
+
+              <button class="btn btn-danger p-1" (click)="abrirModalConfirmacao()">
+                <img src="assets/img/delete.png" alt="Deletar"> Deletar</button></td>
           </tr>
         </tbody>
       </table>

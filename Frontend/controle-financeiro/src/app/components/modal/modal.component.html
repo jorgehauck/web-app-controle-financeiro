@@ -1,13 +1,32 @@
 <div class="modal-content">
   <div class="modal-header">
-    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+    <h1 class="modal-title fs-5" id="exampleModalLabel">Edição</h1>
     <button type="button" class="btn-close" (click)="fecharModal()" aria-label="Close"></button>
   </div>
   <div class="modal-body">
-    ...
+
+    <div class="row">
+      <div class="mb-3 col-md-6">
+        <label class="form-label">Data</label>
+        <input type="text" class="form-control" [value]="itemReceita.data">
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label">Valor R$</label>
+        <input type="text" class="form-control" [value]="itemReceita.valor">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="mb-3 col-md-12">
+        <label class="form-label">Descrição</label>
+        <input type="text" class="form-control" [value]="itemReceita.descricao">
+      </div>
+    </div>
+
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-danger" (click)="fecharModal()"><img src="assets/img/fechar.png" alt="Fechar"> Fechar</button>
-    <button type="button" class="btn btn-success"><img src="assets/img/save.png" alt=""> Salvar</button>
+    <button type="button" class="btn btn-success"><img src="assets/img/save.png" alt="Salvar"> Salvar</button>
   </div>
 </div>

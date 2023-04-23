@@ -34,13 +34,13 @@ export class ListaDespesasComponent implements OnInit {
     });
   }
 
-  public abrirModal(): void {
+  public abrirModal(item: Despesas): void {
     const modalRef = this.modalService.open(ModalComponent);
-    modalRef.componentInstance.name = "Olá Mundo!";
+    modalRef.componentInstance.item = item;
   }
 
   public abrirModalConfirmacao(): void {
     const modalRef = this.modalService.open(ModalConfirmacaoComponent);
-    modalRef.componentInstance.name = "Olá Mundo!";
+    modalRef.componentInstance.name = "";
   }
 }

@@ -31,17 +31,17 @@ export class ListaReceitasComponent implements OnInit {
       this.receitas = page.content;
     },
     (error) => {
-      this.toastService.showError("Erro ao exibir receitas" + error);
+      this.toastService.showError("Erro ao exibir receitas " + error);
     });
   }
 
-  public abrirModal(): void {
+  public abrirModal(item: Receitas): void {
     const modalRef = this.modalService.open(ModalComponent);
-    modalRef.componentInstance.name = "Olá Mundo!";
+    modalRef.componentInstance.item = item;
   }
 
   public abrirModalConfirmacao(): void {
     const modalRef = this.modalService.open(ModalConfirmacaoComponent);
-    modalRef.componentInstance.name = "Olá Mundo!";
+    modalRef.componentInstance.name = "";
   }
 }
