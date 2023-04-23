@@ -5,6 +5,8 @@ import { CabecalhoComponent } from './cabecalho.component';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
+import { ListaDespesasRoutingModule } from 'src/app/pages/lista-despesas/lista-despesas-routing.module';
+
 
 @NgModule({
   declarations: [
@@ -13,7 +15,8 @@ import {MatIconModule} from '@angular/material/icon';
   imports: [
     CommonModule,
     MatToolbarModule,
-    MatIconModule
+    MatIconModule,
+    ListaDespesasRoutingModule
   ],
   exports: [
     CabecalhoComponent

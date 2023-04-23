@@ -18,6 +18,11 @@ const routes: Routes = [
     path: 'receitas',
     loadChildren:() => import('./pages/lista-receitas/lista-receitas.module').then((l) => l.ListaReceitasModule),
     canLoad: [AutenticacaoGuard]
+  },
+  {
+    path: 'despesas',
+    loadChildren:() => import('./pages/lista-despesas/lista-despesas.module').then((d) => d.ListaDespesasModule),
+    canLoad: [AutenticacaoGuard]
   }
 ];
 
