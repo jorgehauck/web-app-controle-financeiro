@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { DespesasService } from './../../services/despesas/despesas.service';
 import { ToastService } from 'src/app/services/toast.service';
 import { Despesas } from 'src/app/model/Despesas';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ModalComponent } from 'src/app/components/modal/modal.component';
+import { ModalConfirmacaoComponent } from 'src/app/components/modal-confirmacao/modal-confirmacao.component';
 
 @Component({
   selector: 'app-lista-despesas',
@@ -14,20 +17,30 @@ export class ListaDespesasComponent implements OnInit {
 
   constructor(
     private despesasService: DespesasService,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private modalService: NgbModal
   ) { }
 
   ngOnInit(): void {
     this.getDespesas();
   }
 
-  private getDespesas() {
+  private getDespesas(): void {
     this.despesasService.getDespesas().subscribe(page => {
       this.despesas = page.content;
     },
     (error) => {
       this.toastService.showError("Erro ao exibir despesas " + error);
-    })
+    });
   }
 
+  public abrirModal(): void {
+    const modalRef = this.modalService.open(ModalComponent);
+    modalRef.componentInstance.name = "Olá Mundo!";
+  }
+
+  public abrirModalConfirmacao(): void {
+    const modalRef = this.modalService.open(ModalConfirmacaoComponent);
+    modalRef.componentInstance.name = "Olá Mundo!";
+  }
 }

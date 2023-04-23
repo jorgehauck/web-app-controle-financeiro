@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Receitas } from 'src/app/model/Receitas';
 import { ReceitasService } from 'src/app/services/receitas/receitas.service';
 import { ToastService } from 'src/app/services/toast.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ModalComponent } from 'src/app/components/modal/modal.component';
+import { ModalConfirmacaoComponent } from 'src/app/components/modal-confirmacao/modal-confirmacao.component';
 
 
 @Component({
@@ -15,7 +18,8 @@ export class ListaReceitasComponent implements OnInit {
 
   constructor(
     private receitasService: ReceitasService,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private modalService: NgbModal
   ) { }
 
   ngOnInit(): void {
@@ -29,5 +33,15 @@ export class ListaReceitasComponent implements OnInit {
     (error) => {
       this.toastService.showError("Erro ao exibir receitas" + error);
     });
+  }
+
+  public abrirModal(): void {
+    const modalRef = this.modalService.open(ModalComponent);
+    modalRef.componentInstance.name = "Olá Mundo!";
+  }
+
+  public abrirModalConfirmacao(): void {
+    const modalRef = this.modalService.open(ModalConfirmacaoComponent);
+    modalRef.componentInstance.name = "Olá Mundo!";
   }
 }

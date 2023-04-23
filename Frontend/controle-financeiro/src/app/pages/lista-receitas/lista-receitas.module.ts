@@ -3,15 +3,18 @@ import { CommonModule } from '@angular/common';
 import { ListaReceitasRoutingModule } from './lista-receitas-routing.module';
 import { ListaReceitasComponent } from './lista-receitas.component';
 import { CabecalhoModule } from 'src/app/components/cabecalho/cabecalho.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ModalModule } from 'src/app/components/modal/modal.module';
 
 
 
 @NgModule({
   declarations: [ListaReceitasComponent],
   imports: [
-    CommonModule,
+  CommonModule,
     ListaReceitasRoutingModule,
-    CabecalhoModule
+    CabecalhoModule,
+    NgbModule
   ]
 })
 export class ListaReceitasModule { }

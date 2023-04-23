@@ -20,11 +20,15 @@
             <td>{{item.valor}}</td>
             <td>{{item.data}}</td>
             <td>
-              <button class="btn btn-info p-1 me-2"><img src="assets/img/edit.png" alt="Editar"> Editar</button>
-              <button class="btn btn-danger p-1"><img src="assets/img/delete.png" alt="Deletar"> Deletar</button></td>
+              <button type="button" class="btn btn-info p-1 me-2" (click)="abrirModal()">
+                <img src="assets/img/edit.png" alt="Editar"> Editar</button>
+
+              <button type="button" class="btn btn-danger p-1" (click)="abrirModalConfirmacao()">
+                <img src="assets/img/delete.png" alt="Deletar"> Deletar</button></td>
           </tr>
         </tbody>
       </table>
     </div>
   </div>
 </div>
+

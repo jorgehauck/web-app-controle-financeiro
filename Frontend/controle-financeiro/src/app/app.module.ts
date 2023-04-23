@@ -19,7 +19,7 @@ registerLocaleData(localePt);
 @NgModule({
   declarations: [
     AppComponent,
-    RodapeComponent
+    RodapeComponent,
   ],
   imports: [
   BrowserModule,
