@@ -14,6 +14,8 @@ import com.controle.financeiro.project.model.Receitas;
 
 public class ReceitasDTO {
 
+	private Long id;
+
 	@NotBlank(message = "Campo descrição obrigatório!")
 	private String descricao;
 	
@@ -30,7 +32,8 @@ public class ReceitasDTO {
 	public ReceitasDTO() {}
 	
 	
-	public ReceitasDTO(String descricao, Double valor, String data, List<DespesasDTO> despesas) {
+	public ReceitasDTO(Long id, String descricao, Double valor, String data, List<DespesasDTO> despesas) {
+		this.id = id;
 		this.descricao = descricao;
 		this.valor = valor;
 		this.data = data;
@@ -38,13 +41,21 @@ public class ReceitasDTO {
 	}
 
 	public ReceitasDTO(Receitas receitas) {
-		descricao = receitas.getDescricao();
-		valor = receitas.getValor();
-		data = receitas.getData().format(formatter);
-		despesas = receitas.getDespesas().stream().map(x -> new DespesasDTO(x)).collect(Collectors.toList());
+		this.id = receitas.getId();
+		this.descricao = receitas.getDescricao();
+		this.valor = receitas.getValor();
+		this.data = receitas.getData().format(formatter);
+		this.despesas = receitas.getDespesas().stream().map(x -> new DespesasDTO(x)).collect(Collectors.toList());
 	}
-	
-	
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	public String getDescricao() {
 		return descricao;
 	}

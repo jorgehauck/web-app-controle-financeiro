@@ -2,8 +2,8 @@ package com.controle.financeiro.project.model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -26,11 +26,11 @@ public class Receitas implements Serializable {
 	private LocalDate data;
 	
 	@OneToMany(mappedBy = "receitas", cascade = CascadeType.ALL)
-	private List<Despesas> despesas = new ArrayList<>();
+	private Set<Despesas> despesas = new HashSet<>();
 	
 	public Receitas() {}
 
-	public Receitas(Long id, String descricao, Double valor, LocalDate data, List<Despesas> despesas) {
+	public Receitas(Long id, String descricao, Double valor, LocalDate data, Set<Despesas> despesas) {
 		this.id = id;
 		this.descricao = descricao;
 		this.valor = valor;
@@ -70,7 +70,7 @@ public class Receitas implements Serializable {
 		this.data = data;
 	}
 
-	public List<Despesas> getDespesas() {
+	public Set<Despesas> getDespesas() {
 		return despesas;
 	}
 }

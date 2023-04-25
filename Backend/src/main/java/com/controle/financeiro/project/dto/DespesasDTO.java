@@ -14,6 +14,8 @@ import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 public class DespesasDTO {
 
+	private Long id;
+
 	@NotBlank
 	private String descricao;
 	
@@ -32,14 +34,23 @@ public class DespesasDTO {
 	
 	public DespesasDTO() {}
 	
-	public DespesasDTO(String descricao, Double valor, String data, Long receitaId, Categoria categoria) {
+	public DespesasDTO(Long id, String descricao, Double valor, String data, Long receitaId, Categoria categoria) {
+		this.id = id;
 		this.descricao = descricao;
 		this.valor = valor;
 		this.data = data;
 		this.receitaId = receitaId;
 		this.categoria = categoria;
 	}
-	
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	public String getDescricao() {
 		return descricao;
 	}
@@ -81,6 +92,7 @@ public class DespesasDTO {
 	}
 
 	public DespesasDTO(Despesas despesas) {
+		this.id = despesas.getId();
 		this.descricao = despesas.getDescricao();
 		this.valor = despesas.getValor();
 		this.data = despesas.getData().format(formatter);
