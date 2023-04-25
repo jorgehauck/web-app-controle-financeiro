@@ -16,7 +16,6 @@ export class AutenticacaoInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
 
-
     if(this.tokenService.possuiToken()) {
       const token = this.tokenService.retornaToken();
       const headers = new HttpHeaders({
