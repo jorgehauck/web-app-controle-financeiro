@@ -29,4 +29,13 @@ export class ReceitasService {
       })
     );
   }
+
+  public deletarReceita(id: number): Observable<Page<Receitas>> {
+    return this.httpClient.delete<Receitas>(`${API}/receitas/${id}`)
+    .pipe(
+      switchMap(() => {
+        return this.getReceitas();
+      })
+    );
+  }
 }

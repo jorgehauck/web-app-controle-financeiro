@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment.prod';
-import { Observable } from 'rxjs';
+import { Observable, switchMap } from 'rxjs';
 import { Page } from 'src/app/core/Page';
 import { Despesas } from 'src/app/model/Despesas';
 
@@ -18,9 +18,5 @@ export class DespesasService {
 
   public getDespesas(): Observable<Page<Despesas>> {
     return this.httpClient.get<Page<Despesas>>(`${API}/despesas/listar`);
-  }
-
-  public atualizarDespesa(id: number, despesa: Despesas): Observable<Despesas> {
-    return this.httpClient.put<Despesas>(`${API}/${id}`, despesa);
   }
 }
