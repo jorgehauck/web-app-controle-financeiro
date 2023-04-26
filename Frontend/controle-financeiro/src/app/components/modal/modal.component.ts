@@ -41,7 +41,6 @@ export class ModalComponent implements OnInit {
       },
       (error) => {
         this.toastrService.showError("Erro ao atualizar receita" + error);
-        console.log("ERRO: ", error);
       });
     }
     else {

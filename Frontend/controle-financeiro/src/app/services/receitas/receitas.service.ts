@@ -22,7 +22,7 @@ export class ReceitasService {
   }
 
   public atualizarReceita(id: number, receita: Receitas): Observable<Page<Receitas>> {
-    return this.httpClient.put<Receitas>(`${API}/${id}`, receita)
+    return this.httpClient.put<Receitas>(`${API}/receitas/${id}`, receita)
     .pipe(
       switchMap(() => {
         return this.getReceitas();
