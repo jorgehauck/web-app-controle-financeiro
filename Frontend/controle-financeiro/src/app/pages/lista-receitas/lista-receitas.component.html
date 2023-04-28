@@ -3,6 +3,19 @@
 <div class="container text-center">
   <p class="h1 mt-3">Listagem de Receitas</p>
   <hr>
+  <div class="row mb-3 justify-content-center">
+
+    <div class="col-md-6 d-flex align-items-center">
+      <div class="d-flex justify-content-start">
+        <button class="btn btn-success">Adicionar</button>
+      </div>
+      <input type="text" class="form-control" placeholder="Filtrar">
+      <button type="submit" class="btn btn-primary ms-2 d-flex align-items-center">
+        <i class="fa fa-search"></i>Filtrar</button>
+
+    </div>
+  </div>
+
   <div class="row">
     <div class="col mt-4">
       <table class="table">
@@ -20,10 +33,10 @@
             <td>R$ {{ item.valor | number: '1.2-2' }}</td>
             <td>{{ item.data }}</td>
             <td>
-              <button class="btn btn-info p-1 me-2" (click)="abrirModal(item)">
+              <button type="button" class="btn btn-info p-1 me-2" (click)="abrirModal(item)">
                 <img src="assets/img/edit.png" alt="Editar"> Editar</button>
 
-              <button class="btn btn-danger p-1" (click)="abrirModalConfirmacao()">
+              <button type="button" class="btn btn-danger p-1" (click)="abrirModalConfirmacao()">
                 <img src="assets/img/delete.png" alt="Deletar"> Deletar</button></td>
           </tr>
         </tbody>
