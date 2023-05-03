@@ -50,8 +50,7 @@ export class ModalComponent implements OnInit {
       },
       (error) => {
         this.toastrService.showError("Erro ao atualizar despesa! " + error);
-      })
+      });
     }
   }
-
 }

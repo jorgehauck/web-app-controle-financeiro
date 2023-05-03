@@ -13,13 +13,12 @@ import { RodapeComponent } from './components/rodape/rodape.component';
 import localePt from '@angular/common/locales/pt';
 import { registerLocaleData } from '@angular/common';
 
-
 registerLocaleData(localePt);
 
 @NgModule({
   declarations: [
     AppComponent,
-    RodapeComponent,
+    RodapeComponent
   ],
   imports: [
   BrowserModule,

@@ -21,6 +21,15 @@ export class ReceitasService {
     return this.httpClient.get<Page<Receitas>>(`${API}/receitas/listar`);
   }
 
+  public inserirReceita(receita: Receitas): Observable<Page<Receitas>> {
+    return this.httpClient.post<Receitas>(`${API}/receitas`, receita)
+    .pipe(
+      switchMap(() => {
+        return this.getReceitas();
+      })
+    )
+  }
+
   public atualizarReceita(id: number, receita: Receitas): Observable<Page<Receitas>> {
     return this.httpClient.put<Receitas>(`${API}/receitas/${id}`, receita)
     .pipe(

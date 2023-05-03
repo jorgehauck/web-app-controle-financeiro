@@ -6,9 +6,9 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <a class="nav-link active" aria-current="page" href="#">Receitas</a>
+        <a class="nav-link active" aria-current="page" [routerLink]="['/receitas']">Receitas</a>
         <a class="nav-link active" [routerLink]="['/despesas']">Despesas</a>
-        <a class="nav-link active" href="#">Gráfico Consolidado</a>
+        <a class="nav-link active" [routerLink]="['/grafico-resumo-mes']">Gráfico Consolidado</a>
       </div>
     </div>
     <div class="justify-content-end">

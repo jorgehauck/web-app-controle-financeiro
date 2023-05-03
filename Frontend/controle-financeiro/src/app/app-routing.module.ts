@@ -23,6 +23,11 @@ const routes: Routes = [
     path: 'despesas',
     loadChildren:() => import('./pages/lista-despesas/lista-despesas.module').then((d) => d.ListaDespesasModule),
     canLoad: [AutenticacaoGuard]
+  },
+  {
+    path: 'grafico-resumo-mes',
+    loadChildren:() => import('./pages/grafico-resumo-mes/grafico-resumo-mes.module').then((g) => g.GraficoResumoMesModule),
+    canLoad: [AutenticacaoGuard]
   }
 ];
 

@@ -2,7 +2,7 @@
 
 <div class="container">
    <div class="row">
-      <div class="card mt-3">
+      <div class="card mt-4">
         <div class="card-body">
           <div class="container text-center">
             <p class="h1 mt-3">Listagem de Despesas</p>
@@ -20,9 +20,9 @@
                   </thead>
                   <tbody>
                     <tr *ngFor="let item of despesas">
-                      <td>{{item.descricao}}</td>
-                      <td>{{item.valor}}</td>
-                      <td>{{item.data}}</td>
+                      <td>{{ item.descricao }}</td>
+                      <td>{{ item.valor }}</td>
+                      <td>{{ item.data }}</td>
                       <td>
                         <button type="button" class="btn btn-info p-1 me-2" (click)="abrirModal(item)">
                           <img src="assets/img/edit.png" alt="Editar"> Editar</button>
