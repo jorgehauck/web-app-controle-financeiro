@@ -1,13 +1,30 @@
-<div class="container">
-  <form (submit)="logar()">
-    <h1>Login</h1>
-    <label for="username"><b>E-mail</b></label>
-    <input [(ngModel)]="usuario.email" type="text" placeholder="E-mail" name="email" required>
+<div class="container-fluid">
+  <div class="row d-flex align-items-center">
+    <div class="col-md-6">
+      <div class="row d-flex justify-content-center align-items-center">
+        <div class="col-md-10">
+          <div class="mt-5">
+            <div class="card">
+              <div class="card-body">
+                <form (submit)="logar()">
+                  <h1>Login</h1>
+                  <label for="username"><b>E-mail</b></label>
+                  <input [(ngModel)]="usuario.email" type="text" placeholder="E-mail" name="email" required>
 
-    <label for="password"><b>Senha</b></label>
-    <input [(ngModel)]="usuario.senha" type="password" placeholder="Senha" name="senha" required>
-
-    <button type="submit">Entrar</button>
-  </form>
-  <p>Não possui uma conta? <a [routerLink]="['novo-usuario']">Cadastre-se</a></p>
+                  <label for="password"><b>Senha</b></label>
+                  <input [(ngModel)]="usuario.senha" type="password" placeholder="Senha" name="senha" required>
+                  <button type="submit">Entrar</button>
+                </form>
+                <p>Não possui uma conta? <a [routerLink]="['novo-usuario']">Cadastre-se</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 text-center">
+      <img src="" alt="Imagem de Login">
+      <p class="h1">IMAGEM</p>
+    </div>
+  </div>
 </div>

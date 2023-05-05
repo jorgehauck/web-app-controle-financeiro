@@ -20,8 +20,26 @@ export class DespesasService {
     return this.httpClient.get<Page<Despesas>>(`${API}/despesas/listar`);
   }
 
+  public inserirDespesa(despesa: Despesas): Observable<Page<Despesas>> {
+    return this.httpClient.post<Despesas>(`${API}/despesas`, despesa)
+    .pipe(
+      switchMap(() => {
+        return this.getDespesas();
+      })
+    );
+  }
+
   public atualizarDespesa(id: number, despesa: Despesas): Observable<Page<Despesas>> {
     return this.httpClient.put<Despesas>(`${API}/despesas/${id}`, despesa)
+    .pipe(
+      switchMap(() => {
+        return this.getDespesas();
+      })
+    );
+  }
+
+  public deletarDespesa(id: number): Observable<Page<Despesas>> {
+    return this.httpClient.delete(`${API}/despesas/${id}`)
     .pipe(
       switchMap(() => {
         return this.getDespesas();

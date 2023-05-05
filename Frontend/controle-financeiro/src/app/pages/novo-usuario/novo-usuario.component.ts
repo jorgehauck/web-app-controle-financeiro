@@ -45,7 +45,6 @@ export class NovoUsuarioComponent implements OnInit {
     this.usuario.nomeUsuario = this.formGroup.get('nomeUsuario')?.value;
     this.usuario.email = this.formGroup.get('email')?.value;
     this.usuario.senha = this.formGroup.get('senha')?.value;
-    console.log("DADOS DO USUÁRIO: ", this.usuario);
 
     this.novoUsuarioService.cadastrar(this.usuario).subscribe(() => {
       this.router.navigate(['']);
