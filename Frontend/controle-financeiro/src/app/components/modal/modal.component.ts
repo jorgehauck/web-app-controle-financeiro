@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { Receitas } from 'src/app/model/Receitas';
 import { DespesasService } from 'src/app/services/despesas/despesas.service';
 import { ReceitasService } from 'src/app/services/receitas/receitas.service';
 import { ToastService } from 'src/app/services/toast.service';
@@ -13,6 +13,8 @@ import { ToastService } from 'src/app/services/toast.service';
 })
 export class ModalComponent implements OnInit {
 
+  formGroup!: FormGroup;
+
   @Input()
   item!: any;
 
@@ -23,10 +25,16 @@ export class ModalComponent implements OnInit {
     public activeModal: NgbActiveModal,
     private toastrService: ToastService,
     private receitasService: ReceitasService,
-    private despesasService: DespesasService
+    private despesasService: DespesasService,
+    private formBuilder: FormBuilder
   ) { }
 
   ngOnInit(): void {
+    this.formGroup = this.formBuilder.group({
+      data: ['', Validators.required],
+      valor: ['', Validators.required],
+      descricao: ['', Validators.required]
+    });
   }
 
   public fecharModal(): void {

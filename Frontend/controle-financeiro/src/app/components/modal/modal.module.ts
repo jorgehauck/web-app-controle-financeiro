@@ -1,8 +1,9 @@
 import { NgModule, LOCALE_ID } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ModalComponent } from './modal.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import { MensagemModule } from '../mensagem/mensagem.module';
 
 
 
@@ -11,7 +12,9 @@ import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
   imports: [
     CommonModule,
     FormsModule,
-    NgbModalModule
+    NgbModalModule,
+    ReactiveFormsModule,
+    MensagemModule
   ],
 })
 export class ModalModule { }

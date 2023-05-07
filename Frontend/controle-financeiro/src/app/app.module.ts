@@ -12,13 +12,14 @@ import { RodapeComponent } from './components/rodape/rodape.component';
 
 import localePt from '@angular/common/locales/pt';
 import { registerLocaleData } from '@angular/common';
+import { MensagemComponent } from './components/mensagem/mensagem.component';
 
 registerLocaleData(localePt);
 
 @NgModule({
   declarations: [
     AppComponent,
-    RodapeComponent
+    RodapeComponent,
   ],
   imports: [
   BrowserModule,

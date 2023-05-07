@@ -21,7 +21,7 @@ export class ReceitasService {
     return this.httpClient.get<Page<Receitas>>(`${API}/receitas/listar`);
   }
 
-  public inserirReceita(receita: Receitas): Observable<Page<Receitas>> {
+  public cadastrarReceitas(receita: Receitas): Observable<Page<Receitas>> {
     return this.httpClient.post<Receitas>(`${API}/receitas`, receita)
     .pipe(
       switchMap(() => {

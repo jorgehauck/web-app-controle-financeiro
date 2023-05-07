@@ -1,32 +1,52 @@
 <div class="modal-content">
   <div class="modal-header">
     <h1 class="modal-title fs-5" id="exampleModalLabel">Edição</h1>
-    <button type="button" class="btn-close" (click)="fecharModal()" aria-label="Close"></button>
+      <button type="button" class="btn-close" (click)="fecharModal()" aria-label="Close"></button>
   </div>
+
   <div class="modal-body">
+    <form [formGroup]="formGroup" (submit)="salvar()">
+      <div class="row">
+        <div class="mb-3 col-md-6">
+          <label class="form-label">Data</label>
+          <input type="text" class="form-control" placeholder="Data" formControlName="data"/>
 
-    <div class="row">
-      <div class="mb-3 col-md-6">
-        <label class="form-label">Data</label>
-        <input type="text" class="form-control" [(ngModel)]="item.data">
+          <app-mensagem
+            *ngIf="formGroup.get('data')?.errors?.['required'] && formGroup.get('data')?.touched"
+            mensagem="Data obrigatório!">
+          </app-mensagem>
+        </div>
+
+        <div class="col-md-6">
+          <label class="form-label">Valor R$</label>
+          <input type="text" class="form-control" placeholder="Valor" formControlName="valor"/>
+
+          <app-mensagem
+            *ngIf="formGroup.get('valor')?.errors?.['required'] && formGroup.get('valor')?.touched"
+            mensagem="Valor obrigatório!">
+          </app-mensagem>
+        </div>
       </div>
 
-      <div class="col-md-6">
-        <label class="form-label">Valor R$</label>
-        <input type="text" class="form-control" [(ngModel)]="item.valor">
-      </div>
-    </div>
+      <div class="row">
+        <div class="mb-3 col-md-12">
+          <label class="form-label">Descrição</label>
+          <input type="text" class="form-control" placeholder="Descrição" formControlName="descricao"/>
 
-    <div class="row">
-      <div class="mb-3 col-md-12">
-        <label class="form-label">Descrição</label>
-        <input type="text" class="form-control" [(ngModel)]="item.descricao">
+          <app-mensagem
+            *ngIf="formGroup.get('descricao')?.errors?.['required'] && formGroup.get('descricao')?.touched"
+            mensagem="Descrição obrigatório!">
+          </app-mensagem>
+        </div>
       </div>
-    </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="fecharModal()"><img src="assets/img/fechar.png" alt="Fechar"> Fechar</button>
+        <button type="submit" class="btn btn-success" [disabled]="formGroup.invalid"><img src="assets/img/save.png" alt="Salvar"> Salvar</button>
+      </div>
+    </form>
 
   </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-danger" (click)="fecharModal()"><img src="assets/img/fechar.png" alt="Fechar"> Fechar</button>
-    <button type="button" class="btn btn-success" (click)="salvar()"><img src="assets/img/save.png" alt="Salvar"> Salvar</button>
-  </div>
+
 </div>
+

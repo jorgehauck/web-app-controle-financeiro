@@ -11,10 +11,11 @@ import { ModalModule } from 'src/app/components/modal/modal.module';
 @NgModule({
   declarations: [ListaReceitasComponent],
   imports: [
-  CommonModule,
+    CommonModule,
     ListaReceitasRoutingModule,
     CabecalhoModule,
-    NgbModule
+    NgbModule,
+    ModalModule
   ]
 })
 export class ListaReceitasModule { }
