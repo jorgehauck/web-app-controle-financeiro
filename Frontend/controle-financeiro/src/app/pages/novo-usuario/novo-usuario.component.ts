@@ -35,14 +35,14 @@ export class NovoUsuarioComponent implements OnInit {
 
   private inicializarUsuario() {
     this.usuario = {
-      nomeUsuario: '',
+      nome_usuario: '',
       email: '',
       senha: ''
     }
   }
 
   public cadastrarUsuario() {
-    this.usuario.nomeUsuario = this.formGroup.get('nomeUsuario')?.value;
+    this.usuario.nome_usuario = this.formGroup.get('nomeUsuario')?.value;
     this.usuario.email = this.formGroup.get('email')?.value;
     this.usuario.senha = this.formGroup.get('senha')?.value;
 

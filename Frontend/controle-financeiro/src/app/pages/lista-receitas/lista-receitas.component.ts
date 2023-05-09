@@ -46,7 +46,7 @@ export class ListaReceitasComponent implements OnInit {
     });
   }
 
-  public abrirModal(item: Receitas): void {
+  public abrirModal(item: any): void {
     const modalRef = this.modalService.open(ModalComponent);
     modalRef.componentInstance.isForReceitas = true;
     modalRef.componentInstance.item = item;

@@ -1,12 +1,25 @@
 <app-cabecalho></app-cabecalho>
 
-<div class="container">
+<div class="container-fluid container-sm">
    <div class="row">
       <div class="card mt-4">
         <div class="card-body">
           <div class="container text-center">
             <p class="h1 mt-3">Listagem de Despesas</p>
             <hr/>
+
+            <div class="row mb-3 justify-content-center">
+              <div class="col-md-6 d-flex col-sm-2">
+                <div class="d-flex me-2">
+                  <button class="btn btn-success d-flex me-2">Adicionar</button>
+                </div>
+                <input type="text" class="form-control" />
+                <button type="submit" class="btn btn-primary ms-2 d-flex align-items-center">
+                  <i class="fa fa-search"></i>Filtrar
+                </button>
+              </div>
+            </div>
+
             <div class="row">
               <div class="col mt-4">
                 <table class="table">

@@ -9,7 +9,7 @@
       <div class="row">
         <div class="mb-3 col-md-6">
           <label class="form-label">Data</label>
-          <input type="text" class="form-control" placeholder="Data" formControlName="data"/>
+          <input type="text" [(ngModel)]="item.data" class="form-control" placeholder="Data" formControlName="data"/>
 
           <app-mensagem
             *ngIf="formGroup.get('data')?.errors?.['required'] && formGroup.get('data')?.touched"
@@ -19,7 +19,7 @@
 
         <div class="col-md-6">
           <label class="form-label">Valor R$</label>
-          <input type="text" class="form-control" placeholder="Valor" formControlName="valor"/>
+          <input type="text" [(ngModel)]="item.valor" class="form-control" placeholder="Valor" formControlName="valor"/>
 
           <app-mensagem
             *ngIf="formGroup.get('valor')?.errors?.['required'] && formGroup.get('valor')?.touched"
@@ -31,7 +31,7 @@
       <div class="row">
         <div class="mb-3 col-md-12">
           <label class="form-label">Descrição</label>
-          <input type="text" class="form-control" placeholder="Descrição" formControlName="descricao"/>
+          <input type="text" [(ngModel)]="item.descricao" class="form-control" placeholder="Descrição" formControlName="descricao"/>
 
           <app-mensagem
             *ngIf="formGroup.get('descricao')?.errors?.['required'] && formGroup.get('descricao')?.touched"
@@ -45,8 +45,6 @@
         <button type="submit" class="btn btn-success" [disabled]="formGroup.invalid"><img src="assets/img/save.png" alt="Salvar"> Salvar</button>
       </div>
     </form>
-
   </div>
-
 </div>
 

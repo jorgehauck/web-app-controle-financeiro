@@ -5,18 +5,21 @@
         <div class="card-header bg-primary text-white">
           <h4 class="mb-0">Cadastro</h4>
         </div>
+
         <div class="card-body">
           <form [formGroup]="formGroup" (submit)="cadastrarUsuario()">
             <div class="mb-3">
               <label for="nomeCompleto" class="form-label">Nome completo</label>
-              <input [(ngModel)]="usuario.nomeUsuario" type="text" class="form-control" name="nomeCompleto"
+              <input [(ngModel)]="usuario.nome_usuario" type="text" class="form-control" name="nomeUsuario"
               formControlName="nomeUsuario">
             </div>
+
             <div class="mb-3">
               <label for="email" class="form-label">E-mail</label>
               <input [(ngModel)]="usuario.email" type="email" class="form-control" name="email"
               formControlName="email">
             </div>
+
             <div class="mb-3">
               <label for="senha" class="form-label">Senha</label>
               <input [(ngModel)]="usuario.senha" type="password" class="form-control" name="senha"
