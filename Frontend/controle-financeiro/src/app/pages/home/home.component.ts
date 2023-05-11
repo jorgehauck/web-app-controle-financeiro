@@ -41,6 +41,7 @@ export class HomeComponent implements OnInit {
   }
 
   public logar() {
+    this.usuario.email = this.formGroup.get('email')?.value;
     this.authService.autenticar(this.usuario).subscribe((data) => {
       this.router.navigate(['receitas']);
     },

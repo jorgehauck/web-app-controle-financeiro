@@ -31,6 +31,7 @@
                    *ngIf="formGroup.get('senha')?.errors?.['required'] &&
                     formGroup.get('senha')?.touched">
                   </app-mensagem>
+
                   <button class="btn btn-primary mt-3" type="submit">Entrar</button>
                 </form>
                 <p>Não possui uma conta? <a [routerLink]="['novo-usuario']">Cadastre-se</a></p>
