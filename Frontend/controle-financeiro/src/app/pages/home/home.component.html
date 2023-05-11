@@ -6,16 +6,35 @@
           <div class="mt-5">
             <div class="card">
               <div class="card-body">
-                <form (submit)="logar()">
+
+                <form [formGroup]="formGroup" (submit)="logar()">
                   <h1>Login</h1>
                   <label for="username"><b>E-mail</b></label>
-                  <input [(ngModel)]="usuario.email" type="text" placeholder="E-mail" name="email" required>
+                  <input [(ngModel)]="usuario.email" type="text" placeholder="E-mail" name="email" formControlName="email"/>
+
+                  <app-mensagem
+                    *ngIf="formGroup.get('email')?.errors?.['required'] &&
+                     formGroup.get('email')?.touched"
+                     mensagem="E-mail obrigatório">
+                  </app-mensagem>
+
+                  <app-mensagem
+                  *ngIf="formGroup.get('email')?.errors?.['email'] &&
+                   formGroup.get('email')?.touched"
+                   mensagem="E-mail no formato inválido">
+                  </app-mensagem>
 
                   <label for="password"><b>Senha</b></label>
-                  <input [(ngModel)]="usuario.senha" type="password" placeholder="Senha" name="senha" required>
-                  <button type="submit">Entrar</button>
+                  <input [(ngModel)]="usuario.senha" type="password" placeholder="Senha" name="senha" formControlName="senha"/>
+
+                  <app-mensagem
+                   *ngIf="formGroup.get('senha')?.errors?.['required'] &&
+                    formGroup.get('senha')?.touched">
+                  </app-mensagem>
+                  <button class="btn btn-primary mt-3" type="submit">Entrar</button>
                 </form>
                 <p>Não possui uma conta? <a [routerLink]="['novo-usuario']">Cadastre-se</a></p>
+
               </div>
             </div>
           </div>

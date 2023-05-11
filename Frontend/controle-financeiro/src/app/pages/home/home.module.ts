@@ -5,6 +5,7 @@ import { HomeRoutingModule } from './home.routing';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NovoUsuarioComponent } from '../novo-usuario/novo-usuario.component';
+import { MensagemModule } from 'src/app/components/mensagem/mensagem.module';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { NovoUsuarioComponent } from '../novo-usuario/novo-usuario.component';
     CommonModule,
     HomeRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MensagemModule
   ],
   exports: [
     HomeComponent

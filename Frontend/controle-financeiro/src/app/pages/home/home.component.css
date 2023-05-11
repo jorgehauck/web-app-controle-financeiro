@@ -42,10 +42,6 @@ button[type=submit] {
   width: 100%;
 }
 
-button[type=submit]:hover {
-  background-color: #005eff;
-}
-
 label {
   display: block;
   margin-bottom: 10px;

@@ -15,6 +15,8 @@ export class HomeComponent implements OnInit {
 
   usuario!: Usuario;
 
+  formGroup!: FormGroup;
+
   constructor(
     private formBuiler: FormBuilder,
     private toastService: ToastService,
@@ -24,10 +26,18 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.inicializarUsuario();
+    this.inicializarFormulario();
   }
 
   public inicializarUsuario() {
     this.usuario = {email: '', senha: ''};
+  }
+
+  public inicializarFormulario(): void {
+    this.formGroup = this.formBuiler.group({
+      email: ['', Validators.required, Validators.email],
+      senha: ['', Validators.required]
+    });
   }
 
   public logar() {
