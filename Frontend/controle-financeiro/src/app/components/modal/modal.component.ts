@@ -25,7 +25,10 @@ export class ModalComponent implements OnInit {
     private toastrService: ToastService,
     private receitasService: ReceitasService,
     private despesasService: DespesasService,
-    private formBuilder: FormBuilder) {}
+    private formBuilder: FormBuilder)
+    {
+
+    }
 
   ngOnInit(): void {
     this.formGroup = this.formBuilder.group({
@@ -52,7 +55,7 @@ export class ModalComponent implements OnInit {
       );
     }
     else {
-      this.despesasService.atualizarDespesa(this.item.id, this.item).subscribe(() => {
+        this.despesasService.atualizarDespesa(this.item.id, this.item).subscribe(() => {
         this.toastrService.showSuccess('Despesa atualizada com sucesso!');
         this.fecharModal();
       },
@@ -61,6 +64,19 @@ export class ModalComponent implements OnInit {
         }
       );
     }
+    if(!this.isForReceitas) {
+      this.adicionarReceita();
+    }
+  }
+
+  private adicionarReceita(): void {
+    this.receitasService.cadastrarReceitas(this.item).subscribe(() => {
+      this.toastrService.showSuccess("Receita adcionada com sucesso!");
+      this.fecharModal();
+    },
+    (error) => {
+      this.toastrService.showError("Erro ao adicionar receita! " + error);
+    })
   }
 
   private aoEditar(): void {
