@@ -38,6 +38,17 @@
             mensagem="Descrição obrigatório!">
           </app-mensagem>
         </div>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Favorite food</mat-label>
+          <mat-select panelClass="custom-panel" [disableOptionCentering]="true">
+            <mat-option *ngFor="let categoria of categorias" [value]="categoria">
+              {{categoria}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+
       </div>
 
       <div class="modal-footer">

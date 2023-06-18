@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { Categoria } from 'src/app/enums/Categoria.enum';
 import { DespesasService } from 'src/app/services/despesas/despesas.service';
 import { ReceitasService } from 'src/app/services/receitas/receitas.service';
 import { ToastService } from 'src/app/services/toast.service';
@@ -20,15 +21,24 @@ export class ModalComponent implements OnInit {
   @Input()
   isForReceitas!: boolean;
 
+  categorias: Categoria[] = [
+    Categoria.ALIMENTACAO,
+    Categoria.SAUDE,
+    Categoria.MORADIA,
+    Categoria.TRANSPORTE,
+    Categoria.EDUCACAO,
+    Categoria.LAZER,
+    Categoria.IMPREVISTOS,
+    Categoria.OUTRAS
+  ]
+
   constructor(
     public activeModal: NgbActiveModal,
     private toastrService: ToastService,
     private receitasService: ReceitasService,
     private despesasService: DespesasService,
     private formBuilder: FormBuilder)
-    {
-
-    }
+    {}
 
   ngOnInit(): void {
     this.formGroup = this.formBuilder.group({
