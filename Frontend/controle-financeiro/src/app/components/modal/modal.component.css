@@ -1,4 +1,4 @@
-.custom-panel {
-  max-height: 500px; /* Defina a altura máxima desejada */
-  overflow-y: auto; /* Adicione uma barra de rolagem caso necessário */
+.custom-modal .mat-select-panel {
+  position: fixed !important;
+  z-index: 9999 !important;
 }
