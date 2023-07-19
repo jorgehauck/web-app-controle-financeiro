@@ -40,10 +40,10 @@
         </div>
       </div>
 
-      <div *ngIf="isForReceitas">
+      <div *ngIf="!isForReceitas">
         <div class="row">
           <div class="col-md-12">
-            <label class="form-label">Favorite food</label>
+            <label class="form-label">Categorias</label>
             <select class="form-select">
               <option *ngFor="let categoria of categorias" [value]="categoria">
                 {{categoria}}
@@ -52,8 +52,6 @@
           </div>
         </div>
       </div>
-
-
 
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" (click)="fecharModal()"><img src="assets/img/fechar.png" alt="Fechar"> Fechar</button>

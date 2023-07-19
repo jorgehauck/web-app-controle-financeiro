@@ -32,7 +32,8 @@ public class ReceitasDTO {
 	public ReceitasDTO() {}
 	
 	
-	public ReceitasDTO(Long id, String descricao, Double valor, String data, List<DespesasDTO> despesas) {
+	public ReceitasDTO(Long id, String descricao, Double valor, String data, 
+			List<DespesasDTO> despesas) {
 		this.id = id;
 		this.descricao = descricao;
 		this.valor = valor;
@@ -64,36 +65,26 @@ public class ReceitasDTO {
 		this.descricao = descricao;
 	}
 
-
-
 	public Double getValor() {
 		return valor;
 	}
-
-
 
 	public void setValor(Double valor) {
 		this.valor = valor;
 	}
 
-
-
 	public String getData() {
 		return data;
 	}
-
-
 
 	public void setData(String data) {
 		this.data = data;
 	}
 
-
-
 	public List<DespesasDTO> getDespesas() {
 		return despesas;
 	}
-
+	
 	public Receitas toReceitas() {
 		Receitas receitas = new Receitas();
 		receitas.setDescricao(descricao);

@@ -17,6 +17,7 @@ import com.controle.financeiro.project.dto.ReceitasDTO;
 import com.controle.financeiro.project.exceptionhandler.ReceitasDuplicateException;
 import com.controle.financeiro.project.exceptionhandler.ReceitasNotFoundException;
 import com.controle.financeiro.project.model.Receitas;
+import com.controle.financeiro.project.model.Usuario;
 import com.controle.financeiro.project.repositories.ReceitasRepository;
 
 @Service
@@ -28,7 +29,7 @@ public class ReceitasService {
 	private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
 	@Transactional
-	public ReceitasDTO cadastrarReceitas(ReceitasDTO receitas) {
+	public ReceitasDTO cadastrarReceitas(ReceitasDTO receitas, Usuario usuario) {
 		List<Receitas> descricoesReceitas = receitasRepository.findByDescricao(receitas.getDescricao());
 		
 		for(Receitas rec: descricoesReceitas) 
@@ -39,12 +40,13 @@ public class ReceitasService {
 			}
 		}		
 		Receitas rec = receitas.toReceitas();
+		rec.setUsuario(usuario);
 		receitasRepository.save(rec);
 		return new ReceitasDTO(rec);
 	}
 
-	public Page<ReceitasDTO> getListaReceitas(Pageable pageable) {
-		List<Receitas> receitasList = receitasRepository.getReceitas(pageable);
+	public Page<ReceitasDTO> getListaReceitas(Pageable pageable, Usuario usuarioId) {
+		List<Receitas> receitasList = receitasRepository.getReceitas(pageable, usuarioId);
 		
 		Page<Receitas> imp = new PageImpl<>(receitasList, pageable, receitasList.size());
 		

@@ -9,14 +9,15 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.controle.financeiro.project.model.Receitas;
+import com.controle.financeiro.project.model.Usuario;
 
 @Repository
 public interface ReceitasRepository extends JpaRepository<Receitas, Long>{
 
-List<Receitas> findByDescricao(String descricao);
+	List<Receitas> findByDescricao(String descricao);
 	
-	@Query(value = "select obj FROM Receitas obj LEFT JOIN FETCH obj.despesas")
-	List<Receitas> getReceitas(Pageable pageable);
+	@Query(value = "select obj FROM Receitas obj LEFT JOIN FETCH obj.despesas WHERE obj.usuario = :usuarioId")
+	List<Receitas> getReceitas(Pageable pageable, @Param("usuarioId") Usuario usuario);
 	
 	@Query(value = "select obj FROM Receitas obj LEFT JOIN FETCH obj.despesas WHERE obj.descricao like %:descricao%")
 	List<Receitas> getDescricaoReceitas(@Param("descricao") String descricao, Pageable pageable);

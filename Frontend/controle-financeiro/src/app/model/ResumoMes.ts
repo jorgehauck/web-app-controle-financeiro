@@ -1,5 +1,4 @@
 export interface ResumoMes {
-
   saldoReceitaMes: number,
   saldoDespesaMes: number,
   totalAlimentacao: number,

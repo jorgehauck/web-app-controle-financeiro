@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -27,6 +28,9 @@ public class Receitas implements Serializable {
 	
 	@OneToMany(mappedBy = "receitas", cascade = CascadeType.ALL)
 	private Set<Despesas> despesas = new HashSet<>();
+	
+	@ManyToOne
+	private Usuario usuario;
 	
 	public Receitas() {}
 
@@ -72,5 +76,13 @@ public class Receitas implements Serializable {
 
 	public Set<Despesas> getDespesas() {
 		return despesas;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 }

@@ -1,9 +1,18 @@
 package com.controle.financeiro.project.model;
 
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.validation.constraints.Email;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -16,8 +25,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity(name = "Usuarios")
-@Table(name = "usuarios")
+@Entity
+@Table(name = "tb_usuarios")
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
@@ -28,14 +37,20 @@ public class Usuario implements UserDetails {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
 	@Setter
 	private String nomeUsuario;
+	
 	@Setter
 	@Email
 	@Column(unique = true)
 	private String email;
+	
 	@Setter
     private String senha;
+	
+	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+	private Set<Receitas> receitas = new HashSet<>();
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -51,7 +66,6 @@ public class Usuario implements UserDetails {
 	public String getUsername() {
 		return email;
 	}
-
 	@Override
 	public boolean isAccountNonExpired() {
 		return true;

@@ -43,4 +43,8 @@ export class ListaDespesasComponent implements OnInit {
     const modalRef = this.modalService.open(ModalConfirmacaoComponent);
     modalRef.componentInstance.name = "";
   }
+
+  public adicionarNovaDespesa(): void {
+    const modalRef = this.modalService.open(ModalComponent);
+  }
 }
