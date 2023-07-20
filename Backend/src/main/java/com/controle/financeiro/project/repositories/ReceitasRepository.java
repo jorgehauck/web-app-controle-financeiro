@@ -2,6 +2,7 @@ package com.controle.financeiro.project.repositories;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -16,15 +17,33 @@ public interface ReceitasRepository extends JpaRepository<Receitas, Long>{
 
 	List<Receitas> findByDescricao(String descricao);
 	
-	@Query(value = "select obj FROM Receitas obj LEFT JOIN FETCH obj.despesas WHERE obj.usuario = :usuarioId")
-	List<Receitas> getReceitas(Pageable pageable, @Param("usuarioId") Usuario usuario);
+	@Query(value = "select obj FROM Receitas obj LEFT JOIN FETCH obj.despesas "
+			+ "WHERE obj.usuario = :usuarioId",
+			countQuery = "SELECT COUNT(*) FROM Receitas obj JOIN obj.despesas")
+	Page<Receitas> getReceitas(Pageable pageable, @Param("usuarioId") Usuario usuarioId);
 	
-	@Query(value = "select obj FROM Receitas obj LEFT JOIN FETCH obj.despesas WHERE obj.descricao like %:descricao%")
-	List<Receitas> getDescricaoReceitas(@Param("descricao") String descricao, Pageable pageable);
 	
-	@Query(value = "select obj FROM Receitas obj WHERE YEAR(obj.data) = :ano AND MONTH(obj.data) = :mes")
-	List<Receitas> getResumoReceitas(@Param("ano") Integer ano, @Param("mes") Integer mes);
+	@Query(value = "select obj FROM Receitas obj LEFT JOIN FETCH obj.despesas "
+			+ "WHERE obj.descricao like %:descricao% "
+			+ "AND obj.usuario = :usuarioId")
+	List<Receitas> getDescricaoReceitas(
+			@Param("descricao") String descricao, 
+			@Param("usuarioId") Usuario usuarioId,
+			Pageable pageable);
 	
-	@Query(value = "select obj FROM Receitas obj LEFT JOIN FETCH obj.despesas WHERE obj.id = :id")
-	List<Receitas> getDetalhamentoReceitas(@Param("id") Long id, Pageable pageable);
+	@Query(value = "select obj FROM Receitas obj "
+			+ "WHERE YEAR(obj.data) = :ano "
+			+ "AND MONTH(obj.data) = :mes "
+			+ "AND obj.usuario = :usuarioId")
+	List<Receitas> getResumoReceitas(@Param("ano") Integer ano, 
+			@Param("mes") Integer mes, 
+			@Param("usuarioId") Usuario usuarioId);
+	
+	@Query(value = "select obj FROM Receitas obj LEFT JOIN FETCH obj.despesas "
+			+ "WHERE obj.id = :id "
+			+ "AND obj.usuario = :usuarioId")
+	List<Receitas> getDetalhamentoReceitas(
+			@Param("id") Long id, 
+			@Param("usuarioId") Usuario usuarioId, 
+			Pageable pageable);
 }

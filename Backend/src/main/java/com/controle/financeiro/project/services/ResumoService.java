@@ -9,6 +9,7 @@ import com.controle.financeiro.project.dto.ResumoMesDTO;
 import com.controle.financeiro.project.exceptionhandler.ResumoMesNotFoundException;
 import com.controle.financeiro.project.model.Despesas;
 import com.controle.financeiro.project.model.Receitas;
+import com.controle.financeiro.project.model.Usuario;
 import com.controle.financeiro.project.repositories.DespesasRepository;
 import com.controle.financeiro.project.repositories.ReceitasRepository;
 
@@ -21,7 +22,7 @@ public class ResumoService {
 	@Autowired
 	private ReceitasRepository receitasRepository;
 
-	public ResumoMesDTO resumoMes(Integer ano, Integer mes) {
+	public ResumoMesDTO resumoMes(Integer ano, Integer mes, Usuario usuario) {
 
 		Double totalReceitas = 0.0;
 		Double totalDespesas = 0.0;
@@ -77,7 +78,7 @@ public class ResumoService {
 			totalDespesas += desp.getValor();
 		}
 		
-		List<Receitas> resumoReceitasList = receitasRepository.getResumoReceitas(ano, mes);
+		List<Receitas> resumoReceitasList = receitasRepository.getResumoReceitas(ano,mes,usuario);
 		
 		if(resumoReceitasList.isEmpty())
 		{

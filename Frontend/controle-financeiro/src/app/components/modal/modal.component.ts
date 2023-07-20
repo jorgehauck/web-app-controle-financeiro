@@ -2,6 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Categoria } from 'src/app/enums/Categoria.enum';
+import { Despesas } from 'src/app/model/Despesas';
+import { Receitas } from 'src/app/model/Receitas';
 import { DespesasService } from 'src/app/services/despesas/despesas.service';
 import { ReceitasService } from 'src/app/services/receitas/receitas.service';
 import { ToastService } from 'src/app/services/toast.service';
@@ -20,6 +22,9 @@ export class ModalComponent implements OnInit {
 
   @Input()
   isForReceitas!: boolean;
+
+  receitas!: Receitas;
+  despesas!: Despesas;
 
   categorias: Categoria[] = [
     Categoria.ALIMENTACAO,
@@ -54,29 +59,7 @@ export class ModalComponent implements OnInit {
   }
 
   public salvar(): void {
-    if (this.isForReceitas) {
-        this.receitasService.atualizarReceita(this.item.id, this.item).subscribe(() => {
-        this.toastrService.showSuccess('Receita atualizada com sucesso!');
-        this.fecharModal();
-      },
-    (error) => {
-        this.toastrService.showError('Erro ao atualizar receita' + error);
-        }
-      );
-    }
-    else {
-        this.despesasService.atualizarDespesa(this.item.id, this.item).subscribe(() => {
-        this.toastrService.showSuccess('Despesa atualizada com sucesso!');
-        this.fecharModal();
-      },
-      (error) => {
-          this.toastrService.showError('Erro ao atualizar despesa! ' + error);
-        }
-      );
-    }
-    if(!this.isForReceitas) {
-      this.adicionarReceita();
-    }
+
   }
 
   private adicionarReceita(): void {
@@ -86,7 +69,17 @@ export class ModalComponent implements OnInit {
     },
     (error) => {
       this.toastrService.showError("Erro ao adicionar receita! " + error);
-    })
+    });
+  }
+
+  private atualizarReceita() {
+    this.receitasService.atualizarReceita(this.item.id, this.item).subscribe(() => {
+      this.toastrService.showSuccess('Receita atualizada com sucesso!');
+      this.fecharModal();
+    },
+    (error) => {
+        this.toastrService.showError('Erro ao atualizar receita' + error);
+    });
   }
 
   private aoEditar(): void {

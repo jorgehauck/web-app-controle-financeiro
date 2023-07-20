@@ -48,8 +48,10 @@ public class ReceitasController {
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<Page<ReceitasDTO>> getDetalhamentoReceitas(@PathVariable Long id, Pageable pageable) {
-		Page<ReceitasDTO> receita = service.getDetalhamentoReceitas(id, pageable);
+	public ResponseEntity<Page<ReceitasDTO>> getDetalhamentoReceitas(@PathVariable Long id, 
+			@AuthenticationPrincipal Usuario usuario, 
+			Pageable pageable) {
+		Page<ReceitasDTO> receita = service.getDetalhamentoReceitas(id,usuario,pageable);
 		
 		if(receita == null) {
 			return ResponseEntity.notFound().build();
@@ -68,8 +70,10 @@ public class ReceitasController {
 	}
 	
 	@GetMapping
-	public ResponseEntity<Page<ReceitasDTO>> getReceitasDescricao(@RequestParam("descricao") String descricao, Pageable pageable) {
-		Page<ReceitasDTO> receita = service.getReceitasDescricao(descricao, pageable);
+	public ResponseEntity<Page<ReceitasDTO>> getReceitasDescricao(@RequestParam("descricao") String descricao, 
+			@AuthenticationPrincipal Usuario usuario,
+			Pageable pageable) {
+		Page<ReceitasDTO> receita = service.getReceitasDescricao(descricao,usuario,pageable);
 		
 		return ResponseEntity.ok(receita);
 	}

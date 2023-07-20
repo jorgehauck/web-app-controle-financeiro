@@ -46,15 +46,13 @@ public class ReceitasService {
 	}
 
 	public Page<ReceitasDTO> getListaReceitas(Pageable pageable, Usuario usuarioId) {
-		List<Receitas> receitasList = receitasRepository.getReceitas(pageable, usuarioId);
+		Page<Receitas> receitasList = receitasRepository.getReceitas(pageable, usuarioId);
 		
-		Page<Receitas> imp = new PageImpl<>(receitasList, pageable, receitasList.size());
-		
-		return imp.map(x -> new ReceitasDTO(x));
+		return receitasList.map(x -> new ReceitasDTO(x));
 	}
 
-	public Page<ReceitasDTO> getDetalhamentoReceitas(Long id, Pageable pageable) {
-		List<Receitas> receitaList = receitasRepository.getDetalhamentoReceitas(id, pageable);
+	public Page<ReceitasDTO> getDetalhamentoReceitas(Long id, Usuario usuarioId, Pageable pageable) {
+		List<Receitas> receitaList = receitasRepository.getDetalhamentoReceitas(id,usuarioId,pageable);
 		
 		Page<Receitas> imp = new PageImpl<>(receitaList, pageable, receitaList.size());
 		
@@ -81,8 +79,8 @@ public class ReceitasService {
 		throw new ReceitasNotFoundException();
 	}
 	
-	public Page<ReceitasDTO> getReceitasDescricao(String descricao, Pageable pageable) {
-		List<Receitas> receitaList = receitasRepository.getDescricaoReceitas(descricao, pageable);
+	public Page<ReceitasDTO> getReceitasDescricao(String descricao, Usuario usuarioId,Pageable pageable) {
+		List<Receitas> receitaList = receitasRepository.getDescricaoReceitas(descricao,usuarioId,pageable);
 		
 		Page<Receitas> imp = new PageImpl<>(receitaList, pageable, receitaList.size());
 		
