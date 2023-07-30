@@ -30,12 +30,14 @@ public class ReceitasService {
 
 	@Transactional
 	public ReceitasDTO cadastrarReceitas(ReceitasDTO receitas, Usuario usuario) {
-		List<Receitas> descricoesReceitas = receitasRepository.findByDescricao(receitas.getDescricao());
+		LocalDate dataOrigem = LocalDate.parse(receitas.getData(), formatter);
 		
-		for(Receitas rec: descricoesReceitas) 
-		{
-			if(rec.getDescricao().equals(receitas.getDescricao())) 
-			{
+		List<Receitas> descricoesReceitas = receitasRepository.getDescricaoAndData(receitas.getDescricao(), dataOrigem);
+		
+		for(Receitas rec: descricoesReceitas) {
+			boolean areEqualMes = verificarMes(receitas.getData(), rec.getData());
+			
+			if(rec.getDescricao().equalsIgnoreCase(receitas.getDescricao()) && areEqualMes) {
 				throw new ReceitasDuplicateException();
 			}
 		}		
@@ -56,8 +58,7 @@ public class ReceitasService {
 		
 		Page<Receitas> imp = new PageImpl<>(receitaList, pageable, receitaList.size());
 		
-		if(imp.isEmpty()) 
-		{
+		if(imp.isEmpty()) {
 			throw new ReceitasNotFoundException();
 		}
 		return imp.map(x -> new ReceitasDTO(x));
@@ -67,8 +68,7 @@ public class ReceitasService {
 	public ReceitasDTO atualizarReceita(Long id, ReceitasDTO receita) {
 		Optional<Receitas> rec = receitasRepository.findById(id);
 
-		if(rec.isPresent()) 
-		{
+		if(rec.isPresent()) {
 			Receitas receitaUpdate = rec.get();
 			receitaUpdate.setDescricao(receita.getDescricao());
 			receitaUpdate.setValor(receita.getValor());
@@ -84,8 +84,7 @@ public class ReceitasService {
 		
 		Page<Receitas> imp = new PageImpl<>(receitaList, pageable, receitaList.size());
 		
-		if(imp.isEmpty()) 
-		{
+		if(imp.isEmpty()) {
 			throw new ReceitasNotFoundException();
 		}
 		
@@ -96,10 +95,20 @@ public class ReceitasService {
 	public void deletarReceita(Long id) {
 		Optional<Receitas> receita = receitasRepository.findById(id);
 		
-		if(receita.isEmpty()) 
-		{
+		if(receita.isEmpty()) {
 			throw new ReceitasNotFoundException();
 		}
 		receitasRepository.deleteById(id);
+	}
+	  private boolean verificarMes(String dataOrigem, LocalDate dataDestino) {
+		LocalDate data = LocalDate.parse(dataOrigem, formatter);
+		
+		int mesOrigem = data.getMonthValue();
+		int mesDestino = dataDestino.getMonthValue();
+		
+		if(mesOrigem == mesDestino)
+			return true;
+
+		return false;
 	}
 }

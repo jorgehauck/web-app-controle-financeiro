@@ -1,5 +1,6 @@
 package com.controle.financeiro.project.repositories;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
@@ -15,7 +16,8 @@ import com.controle.financeiro.project.model.Usuario;
 @Repository
 public interface ReceitasRepository extends JpaRepository<Receitas, Long>{
 
-	List<Receitas> findByDescricao(String descricao);
+	@Query(value = "SELECT obj FROM Receitas obj")
+	List<Receitas> getDescricaoAndData(String descricao, LocalDate data);
 	
 	@Query(value = "select obj FROM Receitas obj LEFT JOIN FETCH obj.despesas "
 			+ "WHERE obj.usuario = :usuarioId",

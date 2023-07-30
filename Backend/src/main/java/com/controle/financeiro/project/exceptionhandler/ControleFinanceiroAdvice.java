@@ -15,7 +15,7 @@ public class ControleFinanceiroAdvice {
 	@ExceptionHandler(ReceitasDuplicateException.class)
 	public ResponseEntity<MessageExceptionHandler> receitaDuplicateException(ReceitasDuplicateException receitaDuplicateException) {
 		MessageExceptionHandler error = new MessageExceptionHandler(
-				new Date(), HttpStatus.BAD_REQUEST.value(), "Não é permitido receitas duplicadas");
+				new Date(), HttpStatus.BAD_REQUEST.value(), "Não é permitido receitas duplicadas dentro do mesmo mês!");
 			return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
 	}
 	
