@@ -8,13 +8,13 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.controle.financeiro.project.model.Usuario;
-import com.controle.financeiro.project.repositories.UsuarioRepository;
+import com.controle.financeiro.project.repositories.IUsuarioRepository;
 
 @Service
 public class AutenticacaoService implements UserDetailsService {
 	
 	@Autowired
-	private UsuarioRepository repository;
+	private IUsuarioRepository repository;
 	
 	@Autowired
 	private PasswordEncoder encoder;

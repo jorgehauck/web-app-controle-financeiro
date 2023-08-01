@@ -19,27 +19,32 @@ import com.controle.financeiro.project.exceptionhandler.DespesasDuplicateExcepti
 import com.controle.financeiro.project.exceptionhandler.DespesasNotFoundException;
 import com.controle.financeiro.project.model.Despesas;
 import com.controle.financeiro.project.model.Receitas;
-import com.controle.financeiro.project.repositories.DespesasRepository;
-import com.controle.financeiro.project.repositories.ReceitasRepository;
+import com.controle.financeiro.project.repositories.IDespesasRepository;
+import com.controle.financeiro.project.repositories.IReceitasRepository;
 
 @Service
 public class DespesasService {
 
 	@Autowired
-	private ReceitasRepository receitasRepository;
+	private IReceitasRepository receitasRepository;
 
 	@Autowired
-	private DespesasRepository despesasRepository;
+	private IDespesasRepository despesasRepository;
 
 	private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
 	@Transactional
-	public DespesasDTO cadastrarDespesas(DespesasDTO despesas) {
+	public DespesasDTO createDespesas(DespesasDTO despesas) {
 		Receitas receita = receitasRepository.findById(despesas.getReceitaId()).get();
-		List<Despesas> dep = despesasRepository.findByDescricao(despesas.getDescricao());
+
+		LocalDate data = LocalDate.parse(despesas.getData(), formatter);
+
+		List<Despesas> dep = despesasRepository.findByDescricao(despesas.getDescricao(), data);
 
 		for (Despesas obj : dep) {
-			if (obj.getDescricao().equals(despesas.getDescricao())) {
+			boolean areEqualMes = verificarDatas(despesas.getData(), obj.getData());
+
+			if (obj.getDescricao().equalsIgnoreCase(despesas.getDescricao()) && areEqualMes) {
 				throw new DespesasDuplicateException();
 			}
 		}
@@ -108,5 +113,15 @@ public class DespesasService {
 			throw new DespesasNotFoundException();
 		}
 		despesasRepository.deleteById(id);
+	}
+
+	private  boolean verificarDatas(String dataOrigem, LocalDate dataDestino) {
+		LocalDate data = LocalDate.parse(dataOrigem, formatter);
+		int mesOrigem = data.getMonthValue();
+		int mesDestino = dataDestino.getMonthValue();
+
+		if(mesOrigem == mesDestino)
+			return true;
+		return false;
 	}
 }

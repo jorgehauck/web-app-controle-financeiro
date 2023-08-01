@@ -18,18 +18,18 @@ import com.controle.financeiro.project.exceptionhandler.ReceitasDuplicateExcepti
 import com.controle.financeiro.project.exceptionhandler.ReceitasNotFoundException;
 import com.controle.financeiro.project.model.Receitas;
 import com.controle.financeiro.project.model.Usuario;
-import com.controle.financeiro.project.repositories.ReceitasRepository;
+import com.controle.financeiro.project.repositories.IReceitasRepository;
 
 @Service
 public class ReceitasService {
 
 	@Autowired
-	private ReceitasRepository receitasRepository;
+	private IReceitasRepository receitasRepository;
 
 	private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
 	@Transactional
-	public ReceitasDTO cadastrarReceitas(ReceitasDTO receitas, Usuario usuario) {
+	public ReceitasDTO createReceitas(ReceitasDTO receitas, Usuario usuario) {
 		LocalDate dataOrigem = LocalDate.parse(receitas.getData(), formatter);
 		
 		List<Receitas> descricoesReceitas = receitasRepository.getDescricaoAndData(receitas.getDescricao(), dataOrigem);
@@ -49,7 +49,10 @@ public class ReceitasService {
 
 	public Page<ReceitasDTO> getListaReceitas(Pageable pageable, Usuario usuarioId) {
 		Page<Receitas> receitasList = receitasRepository.getReceitas(pageable, usuarioId);
-		
+
+		if(receitasList.isEmpty())
+			throw new ReceitasNotFoundException();
+
 		return receitasList.map(x -> new ReceitasDTO(x));
 	}
 
@@ -102,7 +105,6 @@ public class ReceitasService {
 	}
 	  private boolean verificarMes(String dataOrigem, LocalDate dataDestino) {
 		LocalDate data = LocalDate.parse(dataOrigem, formatter);
-		
 		int mesOrigem = data.getMonthValue();
 		int mesDestino = dataDestino.getMonthValue();
 		

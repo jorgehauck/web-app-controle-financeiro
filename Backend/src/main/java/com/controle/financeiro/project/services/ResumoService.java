@@ -10,17 +10,17 @@ import com.controle.financeiro.project.exceptionhandler.ResumoMesNotFoundExcepti
 import com.controle.financeiro.project.model.Despesas;
 import com.controle.financeiro.project.model.Receitas;
 import com.controle.financeiro.project.model.Usuario;
-import com.controle.financeiro.project.repositories.DespesasRepository;
-import com.controle.financeiro.project.repositories.ReceitasRepository;
+import com.controle.financeiro.project.repositories.IDespesasRepository;
+import com.controle.financeiro.project.repositories.IReceitasRepository;
 
 @Service
 public class ResumoService {
 
 	@Autowired
-	private DespesasRepository despesasRepository;
+	private IDespesasRepository despesasRepository;
 	
 	@Autowired
-	private ReceitasRepository receitasRepository;
+	private IReceitasRepository receitasRepository;
 
 	public ResumoMesDTO resumoMes(Integer ano, Integer mes, Usuario usuario) {
 

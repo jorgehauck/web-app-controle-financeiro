@@ -32,9 +32,9 @@ public class ReceitasController {
 	private ReceitasService service;
 	
 	@PostMapping
-	public ResponseEntity<ReceitasDTO> cadastrarReceitas(@RequestBody @Valid ReceitasDTO receitas, 
+	public ResponseEntity<ReceitasDTO> createReceitas(@RequestBody @Valid ReceitasDTO receitas,
 			UriComponentsBuilder uriBuilder, @AuthenticationPrincipal Usuario usuario) {
-		ReceitasDTO rec = service.cadastrarReceitas(receitas, usuario);
+		ReceitasDTO rec = service.createReceitas(receitas, usuario);
 		
 		URI uri = uriBuilder.path("/receitas").build().toUri();
 	

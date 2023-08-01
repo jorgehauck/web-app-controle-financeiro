@@ -14,7 +14,7 @@ import com.controle.financeiro.project.model.Receitas;
 import com.controle.financeiro.project.model.Usuario;
 
 @Repository
-public interface ReceitasRepository extends JpaRepository<Receitas, Long>{
+public interface IReceitasRepository extends JpaRepository<Receitas, Long>{
 
 	@Query(value = "SELECT obj FROM Receitas obj")
 	List<Receitas> getDescricaoAndData(String descricao, LocalDate data);

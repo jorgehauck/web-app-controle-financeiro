@@ -1,5 +1,6 @@
 package com.controle.financeiro.project.repositories;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
@@ -12,9 +13,10 @@ import org.springframework.stereotype.Repository;
 import com.controle.financeiro.project.model.Despesas;
 
 @Repository
-public interface DespesasRepository extends JpaRepository<Despesas, Long>{
+public interface IDespesasRepository extends JpaRepository<Despesas, Long>{
 
-List<Despesas> findByDescricao(String descricao);
+	@Query(value = "select obj from Despesas obj")
+	List<Despesas> findByDescricao(String descricao, LocalDate data);
 	
 	@Query(value = "select d FROM Despesas d where d.descricao like %:descricao%")
 	List<Despesas> getDescricaoDespesas(String descricao);

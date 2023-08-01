@@ -30,7 +30,7 @@ public class DespesasController {
 	
 	@PostMapping
 	public ResponseEntity<DespesasDTO> cadastrarDespesas(@RequestBody DespesasDTO despesas, UriComponentsBuilder uriBuilder) {
-		DespesasDTO despesasDto = despesasService.cadastrarDespesas(despesas);
+		DespesasDTO despesasDto = despesasService.createDespesas(despesas);
 		
 		URI uri = uriBuilder.path("/despesas").build().toUri();
 		
