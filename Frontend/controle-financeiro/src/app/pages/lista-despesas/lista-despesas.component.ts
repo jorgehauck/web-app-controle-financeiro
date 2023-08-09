@@ -30,6 +30,7 @@ export class ListaDespesasComponent implements OnInit {
       this.despesas = page.content;
     },
     (error) => {
+      error.status === 404 ? this.toastService.showWarning("Não existem despesas cadastradas!") :
       this.toastService.showError("Erro ao exibir despesas " + error);
     });
   }

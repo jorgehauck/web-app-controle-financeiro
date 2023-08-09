@@ -1,5 +1,5 @@
 import { HttpClientModule } from '@angular/common/http';
-import { LOCALE_ID, NgModule } from '@angular/core';
+import { DEFAULT_CURRENCY_CODE, LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -12,7 +12,7 @@ import { RodapeComponent } from './components/rodape/rodape.component';
 
 import localePt from '@angular/common/locales/pt';
 import { registerLocaleData } from '@angular/common';
-import { MensagemComponent } from './components/mensagem/mensagem.component';
+
 
 registerLocaleData(localePt);
 
@@ -30,7 +30,9 @@ registerLocaleData(localePt);
     ToastrModule.forRoot()
   ],
   providers: [
-    {provide: LOCALE_ID, useValue: 'pt'}
+    {
+      provide: LOCALE_ID, useValue: 'pt'
+    }
   ],
   bootstrap: [AppComponent]
 })

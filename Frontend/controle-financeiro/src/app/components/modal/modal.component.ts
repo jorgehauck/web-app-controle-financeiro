@@ -1,12 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { Categoria } from 'src/app/enums/Categoria.enum';
-import { Despesas } from 'src/app/model/Despesas';
-import { Receitas } from 'src/app/model/Receitas';
-import { DespesasService } from 'src/app/services/despesas/despesas.service';
 import { ReceitasService } from 'src/app/services/receitas/receitas.service';
 import { ToastService } from 'src/app/services/toast.service';
+import { Receitas } from './../../model/Receitas';
 
 @Component({
   selector: 'app-modal',
@@ -15,7 +12,7 @@ import { ToastService } from 'src/app/services/toast.service';
 })
 export class ModalComponent implements OnInit {
 
-  formGroup!: FormGroup;
+  formModal!: FormGroup;
 
   @Input()
   item!: any;
@@ -24,48 +21,41 @@ export class ModalComponent implements OnInit {
   isForReceitas!: boolean;
 
   receitas!: Receitas;
-  despesas!: Despesas;
 
-  categorias: Categoria[] = [
-    Categoria.ALIMENTACAO,
-    Categoria.SAUDE,
-    Categoria.MORADIA,
-    Categoria.TRANSPORTE,
-    Categoria.EDUCACAO,
-    Categoria.LAZER,
-    Categoria.IMPREVISTOS,
-    Categoria.OUTRAS
-  ]
+  dataFormat!: Date;
 
   constructor(
     public activeModal: NgbActiveModal,
     private toastrService: ToastService,
     private receitasService: ReceitasService,
-    private despesasService: DespesasService,
     private formBuilder: FormBuilder)
     {}
 
   ngOnInit(): void {
-    this.formGroup = this.formBuilder.group({
-      data: ['', Validators.required],
-      valor: ['', Validators.required],
-      descricao: ['', Validators.required],
-    });
+    this.inicializarFormulario();
     this.aoEditar();
   }
 
-  public fecharModal(): void {
-    this.activeModal.close();
-  }
 
   public salvar(): void {
-
+    this.createReceita();
   }
 
-  private adicionarReceita(): void {
-    this.receitasService.cadastrarReceitas(this.item).subscribe(() => {
+  public createReceita(): void {
+    let dataReceita = this.formModal.get('data')?.value;
+    let data = new Date(dataReceita);
+    const dataFormatada = data.toLocaleDateString('pt-BR', {timeZone: 'UTC'});
+
+    const novaReceita = {
+      data: dataFormatada,
+      valor: this.formModal.get('valor')?.value,
+      descricao: this.formModal.get('descricao')?.value
+    } as Receitas;
+
+    this.receitasService.cadastrarReceitas(novaReceita).subscribe(() => {
       this.toastrService.showSuccess("Receita adcionada com sucesso!");
       this.fecharModal();
+      this.receitasService.getReceitas();
     },
     (error) => {
       this.toastrService.showError("Erro ao adicionar receita! " + error);
@@ -83,10 +73,23 @@ export class ModalComponent implements OnInit {
   }
 
   private aoEditar(): void {
-    this.formGroup.setValue({
+    this.formModal.setValue({
       data: this.item.data,
       valor: this.item.valor,
       descricao: this.item.descricao,
     });
   }
+
+  public inicializarFormulario(): void {
+    this.formModal = this.formBuilder.group({
+      data: ['', Validators.required],
+      valor: ['', Validators.required],
+      descricao: ['', Validators.required],
+    });
+  }
+
+  public fecharModal(): void {
+    this.activeModal.close();
+  }
+
 }

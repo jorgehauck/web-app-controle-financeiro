@@ -36,13 +36,7 @@ export class ListaReceitasComponent implements OnInit {
       this.receitas = page.content;
     },
     (error) => {
-      if(error.status === 500) {
-        this.toastService.showWarning("Sua sessão expirou, por favor entre novamente!");
-        this.router.navigate(['']);
-        this.usuarioService.logout();
-        return;
-      }
-      this.toastService.showError("Erro ao exibir receitas " + error);
+      this.errorMessage(error.status);
     });
   }
 
@@ -59,5 +53,18 @@ export class ListaReceitasComponent implements OnInit {
 
   public adicionarNovaReceita(): void {
     const modalRef = this.modalService.open(ModalComponent);
+  }
+
+  private errorMessage(errorStatus: any): void {
+    if(errorStatus === 500) {
+      this.toastService.showWarning("Sua sessão expirou, por favor entre novamente!");
+      this.router.navigate(['']);
+      this.usuarioService.logout();
+      return;
+    }
+    if(errorStatus === 404) {
+      this.toastService.showWarning("Não existem receitas cadastradas!");
+      return;
+    }
   }
 }

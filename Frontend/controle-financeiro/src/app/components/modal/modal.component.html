@@ -1,62 +1,72 @@
 <div class="modal-content">
   <div class="modal-header">
-    <h1 class="modal-title fs-5" id="exampleModalLabel"></h1>
+    <h1 class="modal-title fs-5"></h1>
       <button type="button" class="btn-close" (click)="fecharModal()" aria-label="Close"></button>
   </div>
 
-  <div class="modal-body">
-    <form [formGroup]="formGroup" (submit)="salvar()">
-      <div class="row">
-        <div class="mb-3 col-md-6">
-          <label class="form-label">Data</label>
-          <input type="text" [(ngModel)]="item.data" class="form-control" placeholder="Data" formControlName="data"/>
-
-          <app-mensagem
-            *ngIf="formGroup.get('data')?.errors?.['required'] && formGroup.get('data')?.touched"
-            mensagem="Data obrigatório!">
-          </app-mensagem>
-        </div>
-
-        <div class="col-md-6">
-          <label class="form-label">Valor R$</label>
-          <input type="text" [(ngModel)]="item.valor" class="form-control" placeholder="Valor" formControlName="valor"/>
-
-          <app-mensagem
-            *ngIf="formGroup.get('valor')?.errors?.['required'] && formGroup.get('valor')?.touched"
-            mensagem="Valor obrigatório!">
-          </app-mensagem>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="mb-3 col-md-12">
-          <label class="form-label">Descrição</label>
-          <input type="text" [(ngModel)]="item.descricao" class="form-control" placeholder="Descrição" formControlName="descricao"/>
-
-          <app-mensagem
-            *ngIf="formGroup.get('descricao')?.errors?.['required'] && formGroup.get('descricao')?.touched"
-            mensagem="Descrição obrigatório!">
-          </app-mensagem>
-        </div>
-      </div>
-
-      <div *ngIf="!isForReceitas">
+  <form [formGroup]="formModal" (submit)="salvar()">
+    <div class="modal-body">
         <div class="row">
-          <div class="col-md-12">
-            <label class="form-label">Categorias</label>
-            <select class="form-select">
-              <option *ngFor="let categoria of categorias" [value]="categoria">
-                {{categoria}}
-              </option>
-            </select>
+          <div class="mb-3 col-md-6">
+            <label class="form-label">Data</label>
+              <input type="date"
+              class="form-control"
+              placeholder="Data"
+              formControlName="data"/>
+
+            <app-mensagem
+              *ngIf="formModal.get('data')?.errors?.['required'] && formModal.get('data')?.touched"
+              mensagem="Data obrigatório!">
+            </app-mensagem>
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">Valor R$</label>
+              <input type="text"
+              class="form-control"
+              placeholder="Valor"
+              formControlName="valor"/>
+
+            <app-mensagem
+              *ngIf="formModal.get('valor')?.errors?.['required'] && formModal.get('valor')?.touched"
+              mensagem="Valor obrigatório!">
+            </app-mensagem>
           </div>
         </div>
-      </div>
 
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger" (click)="fecharModal()"><img src="assets/img/fechar.png" alt="Fechar"> Fechar</button>
-        <button type="submit" class="btn btn-success" [disabled]="formGroup.invalid"><img src="assets/img/save.png" alt="Salvar"> Salvar</button>
-      </div>
-    </form>
-  </div>
+        <div class="row">
+          <div class="mb-3 col-md-12">
+            <label class="form-label">Descrição</label>
+            <input type="text"
+            class="form-control"
+            placeholder="Descrição"
+            formControlName="descricao"/>
+
+            <app-mensagem
+              *ngIf="formModal.get('descricao')?.errors?.['required'] && formModal.get('descricao')?.touched"
+              mensagem="Descrição obrigatório!">
+            </app-mensagem>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" (click)="fecharModal()"><img src="assets/img/fechar.png" alt="Fechar"> Fechar</button>
+          <button type="submit" class="btn btn-success" [disabled]="formModal.invalid"><img src="assets/img/save.png" alt="Salvar"> Salvar</button>
+        </div>
+
+        <!-- <div *ngIf="!isForReceitas">
+          <div class="row">
+            <div class="col-md-12">
+              <label class="form-label">Categorias</label>
+              <select class="form-select">
+                <option *ngFor="let categoria of categorias" [value]="categoria">
+                  {{categoria}}
+                </option>
+              </select>
+            </div>
+          </div>
+        </div> -->
+
+    </div>
+  </form>
 </div>

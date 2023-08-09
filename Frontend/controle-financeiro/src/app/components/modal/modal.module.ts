@@ -1,9 +1,12 @@
 import { NgModule, LOCALE_ID } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, registerLocaleData } from '@angular/common';
 import { ModalComponent } from './modal.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { MensagemModule } from '../mensagem/mensagem.module';
+import localePt from '@angular/common/locales/pt';
+
+registerLocaleData(localePt);
 
 @NgModule({
   declarations: [ModalComponent],
@@ -13,6 +16,9 @@ import { MensagemModule } from '../mensagem/mensagem.module';
     NgbModalModule,
     ReactiveFormsModule,
     MensagemModule
+  ],
+  providers: [
+    {provide: LOCALE_ID, useValue: 'pt'}
   ],
 })
 export class ModalModule { }
