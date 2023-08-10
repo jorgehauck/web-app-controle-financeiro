@@ -26,14 +26,14 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.inicializarUsuario();
-    this.inicializarFormulario();
+    this.configurarFormulario();
   }
 
   public inicializarUsuario() {
     this.usuario = {email: '', senha: ''};
   }
 
-  public inicializarFormulario(): void {
+  public configurarFormulario(): void {
     this.formGroup = this.formBuiler.group({
       email: ['', Validators.required, Validators.email],
       senha: ['', Validators.required]

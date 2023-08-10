@@ -4,7 +4,7 @@ import { ListaReceitasRoutingModule } from './lista-receitas-routing.module';
 import { ListaReceitasComponent } from './lista-receitas.component';
 import { CabecalhoModule } from 'src/app/components/cabecalho/cabecalho.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { ModalModule } from 'src/app/components/modal/modal.module';
+import { ModalModule } from 'src/app/pages/lista-receitas/modal/modal.module';
 
 
 

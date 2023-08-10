@@ -3,7 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ReceitasService } from 'src/app/services/receitas/receitas.service';
 import { ToastService } from 'src/app/services/toast.service';
-import { Receitas } from './../../model/Receitas';
+import { Receitas } from '../../../model/Receitas';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-modal',
@@ -22,8 +23,6 @@ export class ModalComponent implements OnInit {
 
   receitas!: Receitas;
 
-  dataFormat!: Date;
-
   constructor(
     public activeModal: NgbActiveModal,
     private toastrService: ToastService,
@@ -32,10 +31,9 @@ export class ModalComponent implements OnInit {
     {}
 
   ngOnInit(): void {
-    this.inicializarFormulario();
+    this.configurarFormulario();
     this.aoEditar();
   }
-
 
   public salvar(): void {
     this.createReceita();
@@ -55,14 +53,14 @@ export class ModalComponent implements OnInit {
     this.receitasService.cadastrarReceitas(novaReceita).subscribe(() => {
       this.toastrService.showSuccess("Receita adcionada com sucesso!");
       this.fecharModal();
-      this.receitasService.getReceitas();
+      window.location.reload();
     },
     (error) => {
-      this.toastrService.showError("Erro ao adicionar receita! " + error);
+      this.toastrService.showError("Erro ao adicionar receita! " + error.error.message);
     });
   }
 
-  private atualizarReceita() {
+  private atualizarReceita(): void {
     this.receitasService.atualizarReceita(this.item.id, this.item).subscribe(() => {
       this.toastrService.showSuccess('Receita atualizada com sucesso!');
       this.fecharModal();
@@ -80,7 +78,7 @@ export class ModalComponent implements OnInit {
     });
   }
 
-  public inicializarFormulario(): void {
+  public configurarFormulario(): void {
     this.formModal = this.formBuilder.group({
       data: ['', Validators.required],
       valor: ['', Validators.required],

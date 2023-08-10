@@ -3,7 +3,7 @@ import { DespesasService } from './../../services/despesas/despesas.service';
 import { ToastService } from 'src/app/services/toast.service';
 import { Despesas } from 'src/app/model/Despesas';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ModalComponent } from 'src/app/components/modal/modal.component';
+import { ModalComponent } from 'src/app/pages/lista-receitas/modal/modal.component';
 import { ModalConfirmacaoComponent } from 'src/app/components/modal-confirmacao/modal-confirmacao.component';
 
 @Component({

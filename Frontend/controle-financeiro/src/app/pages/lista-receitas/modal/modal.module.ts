@@ -3,7 +3,7 @@ import { CommonModule, registerLocaleData } from '@angular/common';
 import { ModalComponent } from './modal.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
-import { MensagemModule } from '../mensagem/mensagem.module';
+import { MensagemModule } from '../../../components/mensagem/mensagem.module';
 import localePt from '@angular/common/locales/pt';
 
 registerLocaleData(localePt);

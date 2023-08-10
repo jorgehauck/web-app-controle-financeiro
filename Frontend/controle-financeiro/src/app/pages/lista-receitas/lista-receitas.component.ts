@@ -3,7 +3,7 @@ import { Receitas } from 'src/app/model/Receitas';
 import { ReceitasService } from 'src/app/services/receitas/receitas.service';
 import { ToastService } from 'src/app/services/toast.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ModalComponent } from 'src/app/components/modal/modal.component';
+import { ModalComponent } from 'src/app/pages/lista-receitas/modal/modal.component';
 import { ModalConfirmacaoComponent } from 'src/app/components/modal-confirmacao/modal-confirmacao.component';
 import { Router } from '@angular/router';
 import { UsuarioService } from 'src/app/services/autenticacao/usuario/usuario.service';
@@ -44,6 +44,7 @@ export class ListaReceitasComponent implements OnInit {
     const modalRef = this.modalService.open(ModalComponent);
     modalRef.componentInstance.isForReceitas = true;
     modalRef.componentInstance.item = item;
+
   }
 
   public abrirModalConfirmacao(): void {
