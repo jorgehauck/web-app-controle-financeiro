@@ -41,12 +41,12 @@
                       <td>{{ item.data }}</td>
                       <td>
                         <button type="button" class="btn btn-info p-1 me-2"
-                        (click)="abrirModal(item)">
+                        (click)="abrirModalEdicao(item)">
                           <img src="assets/img/edit.png" alt="Editar" /> Editar
                         </button>
 
                         <button type="button" class="btn btn-danger p-1"
-                          (click)="abrirModalConfirmacao()">
+                          (click)="abrirModalDelecao(item)">
                           <img src="assets/img/delete.png" alt="Deletar" />
                           Deletar
                         </button>

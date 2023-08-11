@@ -1,5 +1,5 @@
 import { HttpClientModule } from '@angular/common/http';
-import { DEFAULT_CURRENCY_CODE, LOCALE_ID, NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -9,10 +9,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { ToastrModule } from 'ngx-toastr';
 import { RodapeComponent } from './components/rodape/rodape.component';
-
 import localePt from '@angular/common/locales/pt';
 import { registerLocaleData } from '@angular/common';
-
+import { NgxMaskModule } from 'ngx-mask';
 
 registerLocaleData(localePt);
 
@@ -22,12 +21,13 @@ registerLocaleData(localePt);
     RodapeComponent,
   ],
   imports: [
-  BrowserModule,
+    BrowserModule,
     AppRoutingModule,
     AutenticacaoModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    NgxMaskModule.forRoot()
   ],
   providers: [
     {

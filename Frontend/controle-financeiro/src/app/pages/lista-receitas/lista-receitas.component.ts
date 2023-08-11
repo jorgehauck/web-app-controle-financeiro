@@ -40,14 +40,13 @@ export class ListaReceitasComponent implements OnInit {
     });
   }
 
-  public abrirModal(item: any): void {
+  public abrirModalEdicao(item: Receitas): void {
     const modalRef = this.modalService.open(ModalComponent);
     modalRef.componentInstance.isForReceitas = true;
     modalRef.componentInstance.item = item;
-
   }
 
-  public abrirModalConfirmacao(): void {
+  public abrirModalDelecao(item: Receitas): void {
     const modalRef = this.modalService.open(ModalConfirmacaoComponent);
     modalRef.componentInstance.name = "";
   }

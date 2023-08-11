@@ -16,7 +16,7 @@ export class ModalComponent implements OnInit {
   formModal!: FormGroup;
 
   @Input()
-  item!: any;
+  item!: Receitas;
 
   @Input()
   isForReceitas!: boolean;

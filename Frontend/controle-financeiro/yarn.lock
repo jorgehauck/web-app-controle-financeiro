@@ -4538,6 +4538,13 @@
   "resolved" "https://registry.npmjs.org/neo-async/-/neo-async-2.6.2.tgz"
   "version" "2.6.2"
 
+"ngx-mask@^13.0.0":
+  "integrity" "sha512-LnYTE32ycBTl8tKwpgNaJ8yDPm1NS7zHMUMonNvZlXzEVCIW61pR2b3pT5apNgkPlSBNyM/AFDzBttoAvarJKA=="
+  "resolved" "https://registry.npmjs.org/ngx-mask/-/ngx-mask-13.0.0.tgz"
+  "version" "13.0.0"
+  dependencies:
+    "tslib" "^2.3.0"
+
 "ngx-toastr@^14.0.0":
   "integrity" "sha512-dnDzSY73pF6FvNyxdh6ftfvXvUg6SU7MAT3orPUCzA77t3ZcFslro06zk4NCA2g67RF7dBwM0OJ/y0SN6fdGYw=="
   "resolved" "https://registry.npmjs.org/ngx-toastr/-/ngx-toastr-14.0.0.tgz"

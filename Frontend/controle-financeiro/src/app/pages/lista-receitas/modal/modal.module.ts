@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { MensagemModule } from '../../../components/mensagem/mensagem.module';
 import localePt from '@angular/common/locales/pt';
+import { NgxMaskModule } from 'ngx-mask';
 
 registerLocaleData(localePt);
 
@@ -15,7 +16,8 @@ registerLocaleData(localePt);
     FormsModule,
     NgbModalModule,
     ReactiveFormsModule,
-    MensagemModule
+    MensagemModule,
+    NgxMaskModule.forChild()
   ],
   providers: [
     {provide: LOCALE_ID, useValue: 'pt'}

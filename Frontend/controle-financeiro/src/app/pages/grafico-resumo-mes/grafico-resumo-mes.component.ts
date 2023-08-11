@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import Chart from 'chart.js/auto';
+import { ResumoMesService } from 'src/app/services/resumo-mes/resumo-mes.service';
+
 
 
 @Component({
@@ -9,7 +11,8 @@ import Chart from 'chart.js/auto';
 })
 export class GraficoResumoMesComponent implements OnInit {
 
-  constructor() { }
+  constructor(private resumoMesService: ResumoMesService)
+  { }
 
   ngOnInit(): void {
     this.gerarGrafico();
@@ -23,7 +26,7 @@ export class GraficoResumoMesComponent implements OnInit {
         datasets: [{
           label: '# of Votes',
           data: [12, 19, 3, 5, 2, 3],
-          borderWidth: 1
+          borderWidth: 2
         }]
       },
       options: {
