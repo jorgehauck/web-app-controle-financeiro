@@ -12,6 +12,8 @@ import { RodapeComponent } from './components/rodape/rodape.component';
 import localePt from '@angular/common/locales/pt';
 import { registerLocaleData } from '@angular/common';
 import { NgxMaskModule } from 'ngx-mask';
+import { CabecalhoModule } from './components/cabecalho/cabecalho.module';
+
 
 registerLocaleData(localePt);
 
@@ -26,8 +28,9 @@ registerLocaleData(localePt);
     AutenticacaoModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    CabecalhoModule,
     ToastrModule.forRoot(),
-    NgxMaskModule.forRoot()
+    NgxMaskModule.forRoot(),
   ],
   providers: [
     {

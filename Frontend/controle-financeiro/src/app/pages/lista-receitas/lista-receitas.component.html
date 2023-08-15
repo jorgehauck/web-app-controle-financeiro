@@ -1,64 +1,33 @@
-<app-cabecalho></app-cabecalho>
+<mat-card class="card">
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="receitas">
 
-<div class="container-fluid container-sm">
-  <div class="row">
-    <div class="col-md-12">
-      <div class="card mt-4">
-        <div class="card-body">
-          <div class="container text-center">
-            <p class="h1 mt-3">Listagem de Receitas</p>
-            <hr />
-            <div class="row mb-3 justify-content-center">
-              <div class="col-md-6 d-flex">
-                <div class="d-flex me-2">
-                  <button class="btn btn-success d-flex me-2" (click)="adicionarNovaReceita()">
-                    Adicionar
-                  </button>
-                </div>
+      <!-- Position Column -->
+      <ng-container matColumnDef="descricao">
+        <th mat-header-cell *matHeaderCellDef> Descrição </th>
+        <td mat-cell *matCellDef="let receita"> {{receita.descricao}} </td>
+      </ng-container>
 
-                <input type="text" class="form-control" />
-                <button type="submit" class="btn btn-primary ms-2 d-flex align-items-center">
-                  <i class="fa fa-search"></i>Filtrar
-                </button>
-              </div>
-            </div>
+      <!-- Name Column -->
+      <ng-container matColumnDef="valor">
+        <th mat-header-cell *matHeaderCellDef> Valor </th>
+        <td mat-cell *matCellDef="let receita"> {{receita.valor}} </td>
+      </ng-container>
 
-            <div class="row d-fluid">
-              <div class="col mt-4">
-                <table class="table">
-                  <thead>
-                    <tr>
-                      <th scope="col">Descrição</th>
-                      <th scope="col">Valor</th>
-                      <th scope="col">Data</th>
-                      <th scope="col"></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr *ngFor="let item of receitas">
-                      <td>{{ item.descricao }}</td>
-                      <td>R$ {{ item.valor | number : "1.2-2" }}</td>
-                      <td>{{ item.data }}</td>
-                      <td>
-                        <button type="button" class="btn btn-info p-1 me-2"
-                        (click)="abrirModalEdicao(item)">
-                          <img src="assets/img/edit.png" alt="Editar" /> Editar
-                        </button>
+      <!-- Weight Column -->
+      <ng-container matColumnDef="data">
+        <th mat-header-cell *matHeaderCellDef> Data </th>
+        <td mat-cell *matCellDef="let receita"> {{receita.data}} </td>
+      </ng-container>
 
-                        <button type="button" class="btn btn-danger p-1"
-                          (click)="abrirModalDelecao(item)">
-                          <img src="assets/img/delete.png" alt="Deletar" />
-                          Deletar
-                        </button>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                   showFirstLastButtons>
+    </mat-paginator>
   </div>
-</div>
+
+
+</mat-card>

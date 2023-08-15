@@ -1,18 +1,40 @@
-<nav class="navbar navbar-expand-lg bg-navbar p-3">
-  <div class="container-fluid">
-    <span class="navbar-brand">Seja bem vindo!</span>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav">
-        <a class="nav-link active" aria-current="page" [routerLink]="['/receitas']">Receitas</a>
-        <a class="nav-link active" [routerLink]="['/despesas']">Despesas</a>
-        <a class="nav-link active" [routerLink]="['/grafico-resumo-mes']">Gráfico Consolidado</a>
+<mat-toolbar color="primary" class="mat-elevation-z8">
+  <button (click)="drawer.toggle()" mat-icon-button>
+      <mat-icon>menu</mat-icon>
+  </button>
+  <span>Seja bem vindo!</span>
+  <span class="example-spacer"></span>
+</mat-toolbar>
+
+<mat-drawer-container autosize>
+  <mat-drawer #drawer opened="false" mode="side" position="start">
+    <mat-nav-list>
+
+      <mat-list-item>
+        <button routerLink="receitas" mat-button><mat-icon>attach_money</mat-icon> Receitas</button>
+      </mat-list-item>
+
+      <mat-list-item>
+        <button routerLink="despesas" mat-button><mat-icon>trending_down</mat-icon> Despesas</button>
+      </mat-list-item>
+
+      <mat-list-item>
+        <button routerLink="grafico-resumo-mes" mat-button><mat-icon>assessment</mat-icon> Gráfico consolidado</button>
+      </mat-list-item>
+
+
+      <mat-divider></mat-divider>
+
+
+      <mat-list-item>
+        <button mat-button (click)="logout()"><mat-icon>logout</mat-icon> Logout</button>
+      </mat-list-item>
+
+    </mat-nav-list>
+  </mat-drawer>
+  <mat-drawer-content>
+      <div style="text-align: center;min-height: 600px;">
+          <router-outlet></router-outlet>
       </div>
-    </div>
-    <div class="justify-content-end">
-      <a (click)="logout()"><img src="assets/img/logout.png" alt="logout"></a>
-    </div>
-  </div>
-</nav>
+  </mat-drawer-content>
+</mat-drawer-container>

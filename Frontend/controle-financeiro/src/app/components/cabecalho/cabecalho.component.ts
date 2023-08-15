@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UsuarioService } from 'src/app/services/autenticacao/usuario/usuario.service';
 
@@ -9,8 +9,9 @@ import { UsuarioService } from 'src/app/services/autenticacao/usuario/usuario.se
 })
 export class CabecalhoComponent implements OnInit {
 
-  @Input()
-  public nomeUsuarioLogado: string = '';
+  opened: boolean = false;
+
+  exibeLogoutIcon: boolean = true;
 
   constructor(
     private usuarioService: UsuarioService,
@@ -23,6 +24,7 @@ export class CabecalhoComponent implements OnInit {
   public logout(): void {
     this.usuarioService.logout();
     this.router.navigate(['']);
+    this.exibeLogoutIcon = false;
   }
 
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Receitas } from 'src/app/model/Receitas';
 import { ReceitasService } from 'src/app/services/receitas/receitas.service';
 import { ToastService } from 'src/app/services/toast.service';
@@ -7,6 +7,8 @@ import { ModalComponent } from 'src/app/pages/lista-receitas/modal/modal.compone
 import { ModalConfirmacaoComponent } from 'src/app/components/modal-confirmacao/modal-confirmacao.component';
 import { Router } from '@angular/router';
 import { UsuarioService } from 'src/app/services/autenticacao/usuario/usuario.service';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 
 
 
@@ -19,10 +21,14 @@ export class ListaReceitasComponent implements OnInit {
 
   receitas!: Array<Receitas>;
 
+  readonly displayedColumns: string[] = ['descricao', 'valor', 'data'];
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
   constructor(
     private receitasService: ReceitasService,
     private toastService: ToastService,
-    private modalService: NgbModal,
+    //private modalService: NgbModal,
     private router: Router,
     private usuarioService: UsuarioService
   ) { }
@@ -40,20 +46,20 @@ export class ListaReceitasComponent implements OnInit {
     });
   }
 
-  public abrirModalEdicao(item: Receitas): void {
-    const modalRef = this.modalService.open(ModalComponent);
-    modalRef.componentInstance.isForReceitas = true;
-    modalRef.componentInstance.item = item;
-  }
+  // public abrirModalEdicao(item: Receitas): void {
+  //   const modalRef = this.modalService.open(ModalComponent);
+  //   modalRef.componentInstance.isForReceitas = true;
+  //   modalRef.componentInstance.item = item;
+  // }
 
-  public abrirModalDelecao(item: Receitas): void {
-    const modalRef = this.modalService.open(ModalConfirmacaoComponent);
-    modalRef.componentInstance.name = "";
-  }
+  // public abrirModalDelecao(item: Receitas): void {
+  //   const modalRef = this.modalService.open(ModalConfirmacaoComponent);
+  //   modalRef.componentInstance.name = "";
+  // }
 
-  public adicionarNovaReceita(): void {
-    const modalRef = this.modalService.open(ModalComponent);
-  }
+  // public adicionarNovaReceita(): void {
+  //   const modalRef = this.modalService.open(ModalComponent);
+  // }
 
   private errorMessage(errorStatus: any): void {
     if(errorStatus === 500) {

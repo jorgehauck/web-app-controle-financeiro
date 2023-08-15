@@ -1,11 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CabecalhoComponent } from './cabecalho.component';
-
-
-import { MatToolbarModule } from '@angular/material/toolbar';
-import {MatIconModule} from '@angular/material/icon';
 import { ListaDespesasRoutingModule } from 'src/app/pages/lista-despesas/lista-despesas-routing.module';
+import { AngularMaterialModule } from 'src/app/shared/angular-material/angular-material.module';
 
 
 @NgModule({
@@ -13,10 +10,9 @@ import { ListaDespesasRoutingModule } from 'src/app/pages/lista-despesas/lista-d
     CabecalhoComponent
   ],
   imports: [
+    AngularMaterialModule,
     CommonModule,
-    MatToolbarModule,
-    MatIconModule,
-    ListaDespesasRoutingModule
+    ListaDespesasRoutingModule,
   ],
   exports: [
     CabecalhoComponent
