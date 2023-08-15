@@ -2,13 +2,12 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Receitas } from 'src/app/model/Receitas';
 import { ReceitasService } from 'src/app/services/receitas/receitas.service';
 import { ToastService } from 'src/app/services/toast.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalComponent } from 'src/app/pages/lista-receitas/modal/modal.component';
 import { ModalConfirmacaoComponent } from 'src/app/components/modal-confirmacao/modal-confirmacao.component';
 import { Router } from '@angular/router';
 import { UsuarioService } from 'src/app/services/autenticacao/usuario/usuario.service';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatTableDataSource } from '@angular/material/table';
+
 
 
 
@@ -21,7 +20,7 @@ export class ListaReceitasComponent implements OnInit {
 
   receitas!: Array<Receitas>;
 
-  readonly displayedColumns: string[] = ['descricao', 'valor', 'data'];
+  readonly displayedColumns: string[] = ['descricao', 'valor', 'data', 'acoes'];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 

@@ -12,6 +12,10 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatCardModule } from '@angular/material/card';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatInputModule } from '@angular/material/input';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   exports: [
@@ -26,7 +30,11 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatDividerModule,
     MatCardModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatFormFieldModule,
+    MatProgressSpinnerModule,
+    MatInputModule,
+    MatDialogModule
   ],
 })
 export class AngularMaterialModule { }
