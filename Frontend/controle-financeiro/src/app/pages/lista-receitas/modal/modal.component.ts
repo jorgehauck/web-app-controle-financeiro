@@ -1,10 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+
 import { ReceitasService } from 'src/app/services/receitas/receitas.service';
 import { ToastService } from 'src/app/services/toast.service';
 import { Receitas } from '../../../model/Receitas';
-import { Router } from '@angular/router';
+
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-modal',
@@ -15,17 +16,19 @@ export class ModalComponent implements OnInit {
 
   formModal!: FormGroup;
 
-  @Input()
   item!: Receitas;
 
-  @Input()
-  isForReceitas!: boolean;
+  // @Input()
+  // isForReceitas!: boolean;
 
   receitas!: Receitas;
 
+  tituloModal!: string;
+
   constructor(
-    public activeModal: NgbActiveModal,
     private toastrService: ToastService,
+    private matDialogRef: MatDialogRef<ModalComponent>,
+    @Inject(MAT_DIALOG_DATA) public receita: Receitas,
     private receitasService: ReceitasService,
     private formBuilder: FormBuilder)
     {}
@@ -52,8 +55,8 @@ export class ModalComponent implements OnInit {
 
     this.receitasService.cadastrarReceitas(novaReceita).subscribe(() => {
       this.toastrService.showSuccess("Receita adcionada com sucesso!");
-      this.fecharModal();
-      window.location.reload();
+      this.fecharPopUp();
+      // window.location.reload();
     },
     (error) => {
       this.toastrService.showError("Erro ao adicionar receita! " + error.error.message);
@@ -63,7 +66,7 @@ export class ModalComponent implements OnInit {
   private atualizarReceita(): void {
     this.receitasService.atualizarReceita(this.item.id, this.item).subscribe(() => {
       this.toastrService.showSuccess('Receita atualizada com sucesso!');
-      this.fecharModal();
+      this.fecharPopUp();
     },
     (error) => {
         this.toastrService.showError('Erro ao atualizar receita' + error);
@@ -72,9 +75,9 @@ export class ModalComponent implements OnInit {
 
   private aoEditar(): void {
     this.formModal.setValue({
-      data: this.item.data,
-      valor: this.item.valor,
-      descricao: this.item.descricao,
+      data: this.receita.data,
+      valor: this.receita.valor,
+      descricao: this.receita.descricao,
     });
   }
 
@@ -86,8 +89,8 @@ export class ModalComponent implements OnInit {
     });
   }
 
-  public fecharModal(): void {
-    this.activeModal.close();
+  public fecharPopUp(): void {
+    this.matDialogRef.close();
   }
 
 }

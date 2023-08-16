@@ -6,12 +6,14 @@ import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { MensagemModule } from '../../../components/mensagem/mensagem.module';
 import localePt from '@angular/common/locales/pt';
 import { NgxMaskModule } from 'ngx-mask';
+import { AngularMaterialModule } from 'src/app/shared/angular-material/material.module';
 
 registerLocaleData(localePt);
 
 @NgModule({
   declarations: [ModalComponent],
   imports: [
+    AngularMaterialModule,
     CommonModule,
     FormsModule,
     NgbModalModule,

@@ -1,12 +1,11 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { Receitas } from 'src/app/model/Receitas';
 import { ReceitasService } from 'src/app/services/receitas/receitas.service';
 import { ToastService } from 'src/app/services/toast.service';
 import { ModalComponent } from 'src/app/pages/lista-receitas/modal/modal.component';
-import { ModalConfirmacaoComponent } from 'src/app/components/modal-confirmacao/modal-confirmacao.component';
 import { Router } from '@angular/router';
 import { UsuarioService } from 'src/app/services/autenticacao/usuario/usuario.service';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatDialog } from '@angular/material/dialog';
 
 
 
@@ -22,11 +21,10 @@ export class ListaReceitasComponent implements OnInit {
 
   readonly displayedColumns: string[] = ['descricao', 'valor', 'data', 'acoes'];
 
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-
   constructor(
     private receitasService: ReceitasService,
     private toastService: ToastService,
+    private dialog: MatDialog,
     //private modalService: NgbModal,
     private router: Router,
     private usuarioService: UsuarioService
@@ -45,11 +43,19 @@ export class ListaReceitasComponent implements OnInit {
     });
   }
 
-  // public abrirModalEdicao(item: Receitas): void {
-  //   const modalRef = this.modalService.open(ModalComponent);
-  //   modalRef.componentInstance.isForReceitas = true;
-  //   modalRef.componentInstance.item = item;
-  // }
+  public editReceita(item: Receitas): void {
+     const dialogRef = this.dialog.open(ModalComponent, {
+      width: '40%',
+      data: item
+     });
+
+     dialogRef.afterClosed().subscribe(result => {
+        if(result) {
+          this.getReceitas();
+        }
+     });
+  }
+
 
   // public abrirModalDelecao(item: Receitas): void {
   //   const modalRef = this.modalService.open(ModalConfirmacaoComponent);

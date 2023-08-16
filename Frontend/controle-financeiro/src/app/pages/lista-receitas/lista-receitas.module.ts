@@ -5,7 +5,7 @@ import { ListaReceitasComponent } from './lista-receitas.component';
 import { CabecalhoModule } from 'src/app/components/cabecalho/cabecalho.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ModalModule } from 'src/app/pages/lista-receitas/modal/modal.module';
-import { AngularMaterialModule } from 'src/app/shared/angular-material/angular-material.module';
+import { AngularMaterialModule } from 'src/app/shared/angular-material/material.module';
 
 
 

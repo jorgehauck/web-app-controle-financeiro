@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
@@ -16,10 +16,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 @NgModule({
   exports: [
-    CommonModule,
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
@@ -34,7 +34,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatFormFieldModule,
     MatProgressSpinnerModule,
     MatInputModule,
-    MatDialogModule
+    MatDialogModule,
+    MatGridListModule
   ],
 })
 export class AngularMaterialModule { }
