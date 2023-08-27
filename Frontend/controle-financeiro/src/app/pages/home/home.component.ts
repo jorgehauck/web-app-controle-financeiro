@@ -13,9 +13,9 @@ import { ToastService } from 'src/app/services/toast.service';
 })
 export class HomeComponent implements OnInit {
 
-  usuario!: Usuario;
-
   formGroup!: FormGroup;
+
+  usuario!: Usuario;
 
   constructor(
     private formBuiler: FormBuilder,
@@ -42,11 +42,12 @@ export class HomeComponent implements OnInit {
 
   public logar() {
     this.usuario.email = this.formGroup.get('email')?.value;
-    this.authService.autenticar(this.usuario).subscribe((data) => {
+
+    this.authService.autenticar(this.usuario).subscribe(() => {
       this.router.navigate(['receitas']);
     },
     (error) => {
       this.toastService.showError("Usuário ou senha inválidos!");
-    })
+    });
   }
 }

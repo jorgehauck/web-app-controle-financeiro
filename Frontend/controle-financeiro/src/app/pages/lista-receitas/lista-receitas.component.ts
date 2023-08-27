@@ -6,9 +6,8 @@ import { ModalComponent } from 'src/app/pages/lista-receitas/modal/modal.compone
 import { Router } from '@angular/router';
 import { UsuarioService } from 'src/app/services/autenticacao/usuario/usuario.service';
 import { MatDialog } from '@angular/material/dialog';
-
-
-
+import { Observable } from 'rxjs';
+import { Page } from 'src/app/core/Page';
 
 @Component({
   selector: 'app-lista-receitas',
@@ -17,15 +16,16 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class ListaReceitasComponent implements OnInit {
 
-  receitas!: Array<Receitas>;
+  receitas!: Array<Receitas>
 
   readonly displayedColumns: string[] = ['descricao', 'valor', 'data', 'acoes'];
+
+  loadingReceitas: boolean = true;
 
   constructor(
     private receitasService: ReceitasService,
     private toastService: ToastService,
     private dialog: MatDialog,
-    //private modalService: NgbModal,
     private router: Router,
     private usuarioService: UsuarioService
   ) { }
@@ -36,7 +36,7 @@ export class ListaReceitasComponent implements OnInit {
 
   private getReceitas(): void {
     this.receitasService.getReceitas().subscribe(page => {
-      this.receitas = page.content;
+        this.receitas = page.content;
     },
     (error) => {
       this.errorMessage(error.status);
@@ -46,12 +46,14 @@ export class ListaReceitasComponent implements OnInit {
   public editReceita(item: Receitas): void {
      const dialogRef = this.dialog.open(ModalComponent, {
       width: '40%',
+      enterAnimationDuration: '1000ms',
+      exitAnimationDuration: '1000ms',
       data: item
      });
 
      dialogRef.afterClosed().subscribe(result => {
         if(result) {
-          this.getReceitas();
+          // this.getReceitas();
         }
      });
   }

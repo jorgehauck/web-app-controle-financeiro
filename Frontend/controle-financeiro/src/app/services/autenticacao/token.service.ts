@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 
 const KEY = 'token';
@@ -18,6 +19,7 @@ export class TokenService {
 
   public excluiToken() {
     localStorage.removeItem(KEY);
+    window.location.reload();
   }
 
   public possuiToken() {

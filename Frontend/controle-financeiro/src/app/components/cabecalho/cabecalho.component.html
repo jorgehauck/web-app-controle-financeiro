@@ -11,20 +11,20 @@
     <mat-nav-list>
 
       <mat-list-item>
-        <button routerLink="receitas" mat-button><mat-icon>attach_money</mat-icon> Receitas</button>
+        <button [routerLink]="['receitas']" mat-button><mat-icon>attach_money</mat-icon> Receitas</button>
       </mat-list-item>
 
       <mat-list-item>
-        <button routerLink="despesas" mat-button><mat-icon>trending_down</mat-icon> Despesas</button>
+        <button [routerLink]="['despesas']" mat-button><mat-icon>trending_down</mat-icon> Despesas</button>
       </mat-list-item>
 
       <mat-list-item>
-        <button routerLink="grafico-resumo-mes" mat-button><mat-icon>assessment</mat-icon> Gráfico consolidado</button>
+        <button [routerLink]="['grafico-resumo-mes']" mat-button><mat-icon>assessment</mat-icon> Gráfico consolidado</button>
       </mat-list-item>
 
-      <mat-divider></mat-divider>
+      <mat-divider *ngIf="!exibeLogout"></mat-divider>
 
-      <mat-list-item>
+      <mat-list-item *ngIf="!exibeLogout">
         <button mat-button (click)="logout()"><mat-icon>logout</mat-icon> Logout</button>
       </mat-list-item>
 

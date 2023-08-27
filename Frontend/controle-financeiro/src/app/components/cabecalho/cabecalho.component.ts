@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { UsuarioService } from 'src/app/services/autenticacao/usuario/usuario.service';
 
 @Component({
@@ -9,9 +9,7 @@ import { UsuarioService } from 'src/app/services/autenticacao/usuario/usuario.se
 })
 export class CabecalhoComponent implements OnInit {
 
-  opened: boolean = false;
-
-  exibeLogoutIcon: boolean = true;
+  exibeLogout: boolean = false;
 
   constructor(
     private usuarioService: UsuarioService,
@@ -24,7 +22,6 @@ export class CabecalhoComponent implements OnInit {
   public logout(): void {
     this.usuarioService.logout();
     this.router.navigate(['']);
-    this.exibeLogoutIcon = false;
+    this.exibeLogout = false;
   }
-
 }
