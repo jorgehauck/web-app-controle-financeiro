@@ -32,11 +32,11 @@ registerLocaleData(localePt);
     ToastrModule.forRoot(),
     NgxMaskModule.forRoot(),
   ],
-  providers: [
-    {
-      provide: LOCALE_ID, useValue: 'pt'
-    }
-  ],
+  // providers: [
+  //   {
+  //     provide: LOCALE_ID, useValue: 'pt'
+  //   }
+  // ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

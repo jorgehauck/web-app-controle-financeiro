@@ -6,8 +6,6 @@ import { ModalComponent } from 'src/app/pages/lista-receitas/modal/modal.compone
 import { Router } from '@angular/router';
 import { UsuarioService } from 'src/app/services/autenticacao/usuario/usuario.service';
 import { MatDialog } from '@angular/material/dialog';
-import { Observable } from 'rxjs';
-import { Page } from 'src/app/core/Page';
 
 @Component({
   selector: 'app-lista-receitas',
@@ -39,7 +37,7 @@ export class ListaReceitasComponent implements OnInit {
         this.receitas = page.content;
     },
     (error) => {
-      this.errorMessage(error.status);
+      this.toastService.showWarning("Erro ao exibir receitas! "+ error.error.message);
     });
   }
 
@@ -64,20 +62,16 @@ export class ListaReceitasComponent implements OnInit {
   //   modalRef.componentInstance.name = "";
   // }
 
-  // public adicionarNovaReceita(): void {
-  //   const modalRef = this.modalService.open(ModalComponent);
-  // }
+  public addReceita(): void {
+    const dialogRef = this.dialog.open(ModalComponent, {
+      width: '40%',
+      enterAnimationDuration: '1000ms',
+      exitAnimationDuration: '1000ms'
+    });
 
-  private errorMessage(errorStatus: any): void {
-    if(errorStatus === 500) {
-      this.toastService.showWarning("Sua sessão expirou, por favor entre novamente!");
-      this.router.navigate(['']);
-      this.usuarioService.logout();
-      return;
-    }
-    if(errorStatus === 404) {
-      this.toastService.showWarning("Não existem receitas cadastradas!");
-      return;
-    }
+    dialogRef.afterClosed().subscribe(result => {
+      if(result)
+        this.getReceitas();
+    });
   }
 }

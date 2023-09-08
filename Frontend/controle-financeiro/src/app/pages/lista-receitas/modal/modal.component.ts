@@ -54,9 +54,8 @@ export class ModalComponent implements OnInit {
     } as Receitas;
 
     this.receitasService.cadastrarReceitas(novaReceita).subscribe(() => {
-      this.toastrService.showSuccess("Receita adcionada com sucesso!");
+      this.toastrService.showSuccess("Receita adicionada com sucesso!");
       this.fecharPopUp();
-      // window.location.reload();
     },
     (error) => {
       this.toastrService.showError("Erro ao adicionar receita! " + error.error.message);

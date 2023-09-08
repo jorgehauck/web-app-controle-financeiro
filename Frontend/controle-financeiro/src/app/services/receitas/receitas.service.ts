@@ -5,6 +5,7 @@ import { Observable, catchError, of, switchMap } from 'rxjs';
 import { Receitas } from 'src/app/model/Receitas';
 import { Page } from 'src/app/core/Page';
 import { ToastService } from '../toast.service';
+import { TokenService } from '../autenticacao/token.service';
 
 const API = environment.apiBackEndUrl;
 
@@ -14,44 +15,21 @@ const API = environment.apiBackEndUrl;
 export class ReceitasService {
   constructor(
     private httpClient: HttpClient,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private tokenService: TokenService
   ) {}
 
   public getReceitas(): Observable<Page<Receitas>> {
     return this.httpClient.get<Page<Receitas>>(`${API}/receitas/listar`)
     .pipe(
       catchError((error) => {
-        if(error.status === 404) {
-          this.toastService.showWarning("Não existem recetias cadastradas!");
+        this.toastService.showWarning("Não existem receitas cadastradas!");
+        if(error.error.status === 500) {
+          this.toastService.showWarning("Sessão expirada, por favor faça o acesso novamente!");
+          this.tokenService.excluiToken();
         }
-
         const lista: Page<Receitas> = {
-          content: [],
-          pageable: {
-            sort: {
-              empty: false,
-              sorted: false,
-              unsorted: false,
-            },
-            offset: 0,
-            pageNumber: 0,
-            pageSize: 0,
-            paged: false,
-            unpaged: false,
-          },
-          totalElements: 0,
-          totalPages: 0,
-          last: false,
-          size: 0,
-          number: 0,
-          sort: {
-            empty: false,
-            sorted: false,
-            unsorted: false,
-          },
-          numberOfElements: 0,
-          first: false,
-          empty: false,
+          content: []
         };
         return of(lista);
       })

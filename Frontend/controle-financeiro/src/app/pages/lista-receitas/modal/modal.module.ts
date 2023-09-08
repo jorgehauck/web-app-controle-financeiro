@@ -1,14 +1,10 @@
-import { NgModule, LOCALE_ID } from '@angular/core';
-import { CommonModule, registerLocaleData } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { ModalComponent } from './modal.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgxMaskModule} from 'ngx-mask';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
-import { MensagemModule } from '../../../components/mensagem/mensagem.module';
-import localePt from '@angular/common/locales/pt';
-import { NgxMaskModule } from 'ngx-mask';
 import { AngularMaterialModule } from 'src/app/shared/angular-material/material.module';
-
-registerLocaleData(localePt);
 
 @NgModule({
   declarations: [ModalComponent],
@@ -18,11 +14,7 @@ registerLocaleData(localePt);
     FormsModule,
     NgbModalModule,
     ReactiveFormsModule,
-    MensagemModule,
     NgxMaskModule.forChild()
-  ],
-  providers: [
-    {provide: LOCALE_ID, useValue: 'pt'}
-  ],
+  ]
 })
 export class ModalModule { }
