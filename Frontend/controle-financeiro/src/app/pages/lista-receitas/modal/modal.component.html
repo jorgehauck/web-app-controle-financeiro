@@ -20,10 +20,13 @@
       Valor <strong>obrigatório!</strong>
     </mat-error>
 
-     <mat-form-field class="full-width" appearance="fill">
+    <mat-form-field class="full-width" appearance="fill">
         <mat-label>Data</mat-label>
-        <input type="date" matInput formControlName="data" />
-     </mat-form-field>
+        <input matInput [matDatepicker]="picker">
+        <mat-hint>DD/MM/YYYY</mat-hint>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
 
      <mat-error *ngIf="formModal.get('data')?.errors?.['required'] && formModal.get('data')?.touched">
       Data <strong>obrigatória!</strong>

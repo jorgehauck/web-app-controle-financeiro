@@ -23,10 +23,12 @@ export class ReceitasService {
     return this.httpClient.get<Page<Receitas>>(`${API}/receitas/listar`)
     .pipe(
       catchError((error) => {
-        this.toastService.showWarning("Não existem receitas cadastradas!");
-        if(error.error.status === 500) {
+        if(error.status === 500) {
           this.toastService.showWarning("Sessão expirada, por favor faça o acesso novamente!");
           this.tokenService.excluiToken();
+        }
+        else {
+          this.toastService.showWarning("Não existem receitas cadastradas!");
         }
         const lista: Page<Receitas> = {
           content: []
@@ -44,10 +46,7 @@ export class ReceitasService {
     );
   }
 
-  public atualizarReceita(
-    id: number,
-    receita: Receitas
-  ): Observable<Page<Receitas>> {
+  public atualizarReceita(id: number,receita: Receitas): Observable<Page<Receitas>> {
     return this.httpClient.put<Receitas>(`${API}/receitas/${id}`, receita).pipe(
       switchMap(() => {
         return this.getReceitas();

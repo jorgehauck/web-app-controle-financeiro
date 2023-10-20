@@ -3,8 +3,6 @@ import { Receitas } from 'src/app/model/Receitas';
 import { ReceitasService } from 'src/app/services/receitas/receitas.service';
 import { ToastService } from 'src/app/services/toast.service';
 import { ModalComponent } from 'src/app/pages/lista-receitas/modal/modal.component';
-import { Router } from '@angular/router';
-import { UsuarioService } from 'src/app/services/autenticacao/usuario/usuario.service';
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({
@@ -14,7 +12,7 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class ListaReceitasComponent implements OnInit {
 
-  receitas!: Array<Receitas>
+  receitas!: Array<Receitas>;
 
   readonly displayedColumns: string[] = ['descricao', 'valor', 'data', 'acoes'];
 
@@ -23,9 +21,7 @@ export class ListaReceitasComponent implements OnInit {
   constructor(
     private receitasService: ReceitasService,
     private toastService: ToastService,
-    private dialog: MatDialog,
-    private router: Router,
-    private usuarioService: UsuarioService
+    private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {

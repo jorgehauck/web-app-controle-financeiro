@@ -14,9 +14,6 @@ import { registerLocaleData } from '@angular/common';
 import { NgxMaskModule } from 'ngx-mask';
 import { CabecalhoModule } from './components/cabecalho/cabecalho.module';
 
-
-registerLocaleData(localePt);
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,11 +29,15 @@ registerLocaleData(localePt);
     ToastrModule.forRoot(),
     NgxMaskModule.forRoot(),
   ],
-  // providers: [
-  //   {
-  //     provide: LOCALE_ID, useValue: 'pt'
-  //   }
-  // ],
+  providers: [
+    {
+      provide: LOCALE_ID, useValue: 'pt-BR'
+    }
+  ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor() {
+    registerLocaleData(localePt, 'pt-BR');
+  }
+}

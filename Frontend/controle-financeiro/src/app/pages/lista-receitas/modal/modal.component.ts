@@ -53,6 +53,7 @@ export class ModalComponent implements OnInit {
       descricao: this.formModal.get('descricao')?.value
     } as Receitas;
 
+
     this.receitasService.cadastrarReceitas(novaReceita).subscribe(() => {
       this.toastrService.showSuccess("Receita adicionada com sucesso!");
       this.fecharPopUp();
