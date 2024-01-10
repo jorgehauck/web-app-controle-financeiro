@@ -12,7 +12,7 @@
     </mat-error>
 
      <mat-form-field class="full-width" appearance="fill">
-        <mat-label>R$ Valor</mat-label>
+        <mat-label>Valor (R$)</mat-label>
         <input matInput formControlName="valor" mask="separator.2" thousandSeparator="."/>
      </mat-form-field>
 
@@ -22,7 +22,7 @@
 
     <mat-form-field class="full-width" appearance="fill">
         <mat-label>Data</mat-label>
-        <input matInput [matDatepicker]="picker">
+        <input matInput formControlName="data" [matDatepicker]="picker">
         <mat-hint>DD/MM/YYYY</mat-hint>
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>

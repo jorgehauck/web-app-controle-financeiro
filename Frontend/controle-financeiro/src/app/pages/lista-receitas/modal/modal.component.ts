@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { ReceitasService } from 'src/app/services/receitas/receitas.service';
@@ -6,6 +6,7 @@ import { ToastService } from 'src/app/services/toast.service';
 import { Receitas } from '../../../model/Receitas';
 
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-modal',
@@ -44,14 +45,18 @@ export class ModalComponent implements OnInit {
 
   public createReceita(): void {
     let dataReceita = this.formModal.get('data')?.value;
-    let data = new Date(dataReceita);
-    const dataFormatada = data.toLocaleDateString('pt-BR', {timeZone: 'UTC'});
+    console.log("DATA SELECIONADA: ", dataReceita);
+
+    const dataFormatada = new DatePipe('pt-BR').transform(dataReceita, 'dd/MM/yyyy');
+    console.log("DATA: ", dataFormatada);
 
     const novaReceita = {
       data: dataFormatada,
       valor: this.formModal.get('valor')?.value,
       descricao: this.formModal.get('descricao')?.value
     } as Receitas;
+
+    console.log("RECEITA: ", novaReceita);
 
 
     this.receitasService.cadastrarReceitas(novaReceita).subscribe(() => {
@@ -61,6 +66,12 @@ export class ModalComponent implements OnInit {
     (error) => {
       this.toastrService.showError("Erro ao adicionar receita! " + error.error.message);
     });
+  }
+
+  public updateReceita(): void {
+    if(this.item.id && this.item) {
+        this.atualizarReceita();
+    }
   }
 
   private atualizarReceita(): void {
@@ -74,8 +85,12 @@ export class ModalComponent implements OnInit {
   }
 
   private aoEditar(): void {
+    const data = this.receita.data;
+    const dataConvertida = new Date(data).toLocaleString('pt-BR');
+    const dataOriginal = new Date(dataConvertida);
+
     this.formModal.setValue({
-      data: this.receita.data,
+      data: dataOriginal,
       valor: this.receita.valor,
       descricao: this.receita.descricao,
     });

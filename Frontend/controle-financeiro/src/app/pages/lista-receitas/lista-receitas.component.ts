@@ -5,6 +5,7 @@ import { ToastService } from 'src/app/services/toast.service';
 import { ModalComponent } from 'src/app/pages/lista-receitas/modal/modal.component';
 import { MatDialog } from '@angular/material/dialog';
 
+
 @Component({
   selector: 'app-lista-receitas',
   templateUrl: './lista-receitas.component.html',
@@ -14,7 +15,7 @@ export class ListaReceitasComponent implements OnInit {
 
   receitas!: Array<Receitas>;
 
-  readonly displayedColumns: string[] = ['descricao', 'valor', 'data', 'acoes'];
+  public readonly displayedColumns: string[] = ['descricao', 'valor', 'data', 'acoes'];
 
   loadingReceitas: boolean = true;
 
@@ -38,6 +39,8 @@ export class ListaReceitasComponent implements OnInit {
   }
 
   public editReceita(item: Receitas): void {
+    console.log("ITEM: ", item);
+
      const dialogRef = this.dialog.open(ModalComponent, {
       width: '40%',
       enterAnimationDuration: '1000ms',
@@ -51,7 +54,6 @@ export class ListaReceitasComponent implements OnInit {
         }
      });
   }
-
 
   // public abrirModalDelecao(item: Receitas): void {
   //   const modalRef = this.modalService.open(ModalConfirmacaoComponent);
