@@ -39,8 +39,6 @@ export class ListaReceitasComponent implements OnInit {
   }
 
   public editReceita(item: Receitas): void {
-    console.log("ITEM: ", item);
-
      const dialogRef = this.dialog.open(ModalComponent, {
       width: '40%',
       enterAnimationDuration: '1000ms',
@@ -50,6 +48,7 @@ export class ListaReceitasComponent implements OnInit {
 
      dialogRef.afterClosed().subscribe(result => {
         if(result) {
+          console.log("DADOS: ", result);
           // this.getReceitas();
         }
      });

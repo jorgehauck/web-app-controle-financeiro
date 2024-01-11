@@ -29,7 +29,7 @@ export class ModalComponent implements OnInit {
   constructor(
     private toastrService: ToastService,
     private matDialogRef: MatDialogRef<ModalComponent>,
-    @Inject(MAT_DIALOG_DATA) public receita: Receitas,
+    @Inject(MAT_DIALOG_DATA) public data: any,
     private receitasService: ReceitasService,
     private formBuilder: FormBuilder)
     {}
@@ -40,15 +40,17 @@ export class ModalComponent implements OnInit {
   }
 
   public salvar(): void {
-    this.createReceita();
+    if(this.data) {
+      console.log("DADOS: ", this.data);
+      // this.atualizarReceita(this.data.id, this.data);
+      return;
+    }
+    console.log("CRIAÇÃO!!!!");
   }
 
   public createReceita(): void {
     let dataReceita = this.formModal.get('data')?.value;
-    console.log("DATA SELECIONADA: ", dataReceita);
-
     const dataFormatada = new DatePipe('pt-BR').transform(dataReceita, 'dd/MM/yyyy');
-    console.log("DATA: ", dataFormatada);
 
     const novaReceita = {
       data: dataFormatada,
@@ -56,28 +58,19 @@ export class ModalComponent implements OnInit {
       descricao: this.formModal.get('descricao')?.value
     } as Receitas;
 
-    console.log("RECEITA: ", novaReceita);
-
-
     this.receitasService.cadastrarReceitas(novaReceita).subscribe(() => {
       this.toastrService.showSuccess("Receita adicionada com sucesso!");
-      this.fecharPopUp();
+      this.fecharDialog();
     },
     (error) => {
       this.toastrService.showError("Erro ao adicionar receita! " + error.error.message);
     });
   }
 
-  public updateReceita(): void {
-    if(this.item.id && this.item) {
-        this.atualizarReceita();
-    }
-  }
-
-  private atualizarReceita(): void {
-    this.receitasService.atualizarReceita(this.item.id, this.item).subscribe(() => {
+  private atualizarReceita(id: number, item: Receitas): void {
+    this.receitasService.atualizarReceita(id, item).subscribe(() => {
       this.toastrService.showSuccess('Receita atualizada com sucesso!');
-      this.fecharPopUp();
+      this.fecharDialog();
     },
     (error) => {
         this.toastrService.showError('Erro ao atualizar receita' + error);
@@ -85,14 +78,14 @@ export class ModalComponent implements OnInit {
   }
 
   private aoEditar(): void {
-    const data = this.receita.data;
+    const data = this.data.data;
     const dataConvertida = new Date(data).toLocaleString('pt-BR');
     const dataOriginal = new Date(dataConvertida);
 
     this.formModal.setValue({
       data: dataOriginal,
-      valor: this.receita.valor,
-      descricao: this.receita.descricao,
+      valor: this.data.valor,
+      descricao: this.data.descricao,
     });
   }
 
@@ -104,8 +97,13 @@ export class ModalComponent implements OnInit {
     });
   }
 
-  public fecharPopUp(): void {
-    this.matDialogRef.close();
+  public fecharDialog(): void {
+    let dados = {
+      data: this.formModal.get('data')?.value,
+      descricao: this.formModal.get('descricao')?.value,
+      valor: this.formModal.get('valor')?.value
+    }
+    this.matDialogRef.close(dados);
   }
 
 }
