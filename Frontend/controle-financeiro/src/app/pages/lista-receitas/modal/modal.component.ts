@@ -40,12 +40,17 @@ export class ModalComponent implements OnInit {
   }
 
   public salvar(): void {
-    if(this.data) {
-      console.log("DADOS: ", this.data);
-      // this.atualizarReceita(this.data.id, this.data);
-      return;
+    let dados = {
+      id: this.data.id,
+      descricao: this.formModal.get('descricao')?.value,
+      valor: this.formModal.get('valor')?.value,
+      data: this.formModal.get('data')?.value
     }
-    console.log("CRIAÇÃO!!!!");
+    dados.data = new DatePipe('pt-BR').transform(dados.data, 'dd/MM/yyyy');
+
+    if(this.data) {
+      this.atualizarReceita(dados.id, dados);
+    }
   }
 
   public createReceita(): void {
@@ -58,13 +63,16 @@ export class ModalComponent implements OnInit {
       descricao: this.formModal.get('descricao')?.value
     } as Receitas;
 
-    this.receitasService.cadastrarReceitas(novaReceita).subscribe(() => {
-      this.toastrService.showSuccess("Receita adicionada com sucesso!");
-      this.fecharDialog();
-    },
-    (error) => {
-      this.toastrService.showError("Erro ao adicionar receita! " + error.error.message);
-    });
+    console.log("NOVA RECEITA: ", novaReceita);
+
+
+    // this.receitasService.cadastrarReceitas(novaReceita).subscribe(() => {
+    //   this.toastrService.showSuccess("Receita adicionada com sucesso!");
+    //   this.fecharDialog();
+    // },
+    // (error) => {
+    //   this.toastrService.showError("Erro ao adicionar receita! " + error.error.message);
+    // });
   }
 
   private atualizarReceita(id: number, item: Receitas): void {
