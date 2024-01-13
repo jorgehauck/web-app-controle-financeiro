@@ -41,7 +41,7 @@ export class ModalComponent implements OnInit {
 
   public salvar(): void {
     let dados = {
-      id: this.data.id,
+      id: this.data.item.id,
       descricao: this.formModal.get('descricao')?.value,
       valor: this.formModal.get('valor')?.value,
       data: this.formModal.get('data')?.value
@@ -86,14 +86,14 @@ export class ModalComponent implements OnInit {
   }
 
   private aoEditar(): void {
-    const data = this.data.data;
+    const data = this.data.item.data;
     const dataConvertida = new Date(data).toLocaleString('pt-BR');
     const dataOriginal = new Date(dataConvertida);
 
     this.formModal.setValue({
       data: dataOriginal,
-      valor: this.data.valor,
-      descricao: this.data.descricao,
+      valor: this.data.item.valor,
+      descricao: this.data.item.descricao,
     });
   }
 

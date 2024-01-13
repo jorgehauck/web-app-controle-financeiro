@@ -43,7 +43,7 @@ export class ListaReceitasComponent implements OnInit {
       width: '40%',
       enterAnimationDuration: '1000ms',
       exitAnimationDuration: '1000ms',
-      data: item
+      data: {title: 'Editar Receita', item: item}
      });
 
      dialogRef.afterClosed().subscribe(result => {
@@ -62,7 +62,8 @@ export class ListaReceitasComponent implements OnInit {
     const dialogRef = this.dialog.open(ModalComponent, {
       width: '40%',
       enterAnimationDuration: '1000ms',
-      exitAnimationDuration: '1000ms'
+      exitAnimationDuration: '1000ms',
+      data: {title: "Adicionar Receita"}
     });
 
     dialogRef.afterClosed().subscribe(result => {
