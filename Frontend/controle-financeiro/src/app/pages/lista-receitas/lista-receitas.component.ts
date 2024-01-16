@@ -40,17 +40,23 @@ export class ListaReceitasComponent implements OnInit {
 
   public getReceitas(): void {
     this.receitasService.getReceitas().subscribe((page) => {
-        console.log('DADOS DO SERVIÇO: ', page);
         this.receitas = page.content;
         this.dataSource.data = this.receitas;
-        this.dataSource.paginator = this.paginator;
-        console.log("DATA SOURCE.DATA: ", this.dataSource.data);
+        if (this.paginator) {
+          this.dataSource.paginator = this.paginator;
+        } else {
+          setTimeout(() => {
+            this.dataSource.paginator = this.paginator;
+          }, 100);
+        }
         this.paginator.length = page.totalElements;
       },
       (error) => {
         this.toastService.showWarning('Erro ao exibir receitas! ' + error.error.message);
-      });
+      }
+    );
   }
+
 
   public editReceita(item: Receitas): void {
     const dialogRef = this.dialog.open(ModalComponent, {
