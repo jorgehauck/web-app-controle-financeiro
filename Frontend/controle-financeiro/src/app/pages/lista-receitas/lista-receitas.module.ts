@@ -6,8 +6,6 @@ import { CabecalhoModule } from 'src/app/components/cabecalho/cabecalho.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ModalModule } from 'src/app/pages/lista-receitas/modal/modal.module';
 import { AngularMaterialModule } from 'src/app/shared/angular-material/material.module';
-import { MatSortModule } from '@angular/material/sort';
-
 
 
 @NgModule({
@@ -18,8 +16,7 @@ import { MatSortModule } from '@angular/material/sort';
     ListaReceitasRoutingModule,
     CabecalhoModule,
     NgbModule,
-    ModalModule,
-    MatSortModule
+    ModalModule
   ]
 })
 export class ListaReceitasModule { }

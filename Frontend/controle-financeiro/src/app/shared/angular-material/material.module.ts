@@ -19,7 +19,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from "@angular/material/core"
-
+import { MatSortModule } from '@angular/material/sort';
 
 @NgModule({
   exports: [
@@ -33,14 +33,15 @@ import { MatNativeDateModule } from "@angular/material/core"
     MatDividerModule,
     MatCardModule,
     MatTableModule,
-    MatPaginatorModule,
     MatFormFieldModule,
     MatProgressSpinnerModule,
     MatInputModule,
     MatDialogModule,
     MatGridListModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatSortModule,
+    MatPaginatorModule,
   ],
 })
 export class AngularMaterialModule { }
