@@ -14,7 +14,6 @@ import { DatePipe } from '@angular/common';
   styleUrls: ['./modal.component.css'],
 })
 export class ModalComponent implements OnInit {
-
   formModal!: FormGroup;
 
   item!: Receitas;
@@ -31,8 +30,8 @@ export class ModalComponent implements OnInit {
     private matDialogRef: MatDialogRef<ModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private receitasService: ReceitasService,
-    private formBuilder: FormBuilder)
-    {}
+    private formBuilder: FormBuilder
+  ) {}
 
   ngOnInit(): void {
     this.configurarFormulario();
@@ -40,55 +39,59 @@ export class ModalComponent implements OnInit {
   }
 
   public salvar(): void {
-    let dados = {
-      id: this.data.item.id,
-      descricao: this.formModal.get('descricao')?.value,
-      valor: this.formModal.get('valor')?.value,
-      data: this.formModal.get('data')?.value
-    }
-    dados.data = new DatePipe('pt-BR').transform(dados.data, 'dd/MM/yyyy');
+    let descricao = this.formModal.get('descricao')?.value;
+    let valor = this.formModal.get('valor')?.value;
+    let dataReceita = this.formModal.get('data')?.value;
 
-    if(this.data) {
-      this.atualizarReceita(dados.id, dados);
+    if(this.data.item) {
+      dataReceita = new DatePipe('pt-BR').transform(dataReceita, 'dd/MM/yyyy');
+
+      let updateReceita = {
+        id: this.data.item.id,
+        descricao: descricao,
+        valor: valor,
+        data: dataReceita,
+      };
+      this.atualizarReceita(updateReceita.id, updateReceita);
     }
+    this.createReceita();
   }
 
   public createReceita(): void {
     let dataReceita = this.formModal.get('data')?.value;
-    const dataFormatada = new DatePipe('pt-BR').transform(dataReceita, 'dd/MM/yyyy');
+    const dataFormatada = new DatePipe('pt-BR').transform(dataReceita,'dd/MM/yyyy');
 
     const novaReceita = {
       data: dataFormatada,
       valor: this.formModal.get('valor')?.value,
-      descricao: this.formModal.get('descricao')?.value
+      descricao: this.formModal.get('descricao')?.value,
     } as Receitas;
 
-    console.log("NOVA RECEITA: ", novaReceita);
-
-
-    // this.receitasService.cadastrarReceitas(novaReceita).subscribe(() => {
-    //   this.toastrService.showSuccess("Receita adicionada com sucesso!");
-    //   this.fecharDialog();
-    // },
-    // (error) => {
-    //   this.toastrService.showError("Erro ao adicionar receita! " + error.error.message);
-    // });
-  }
-
-  private atualizarReceita(id: number, item: Receitas): void {
-    this.receitasService.atualizarReceita(id, item).subscribe(() => {
-      this.toastrService.showSuccess('Receita atualizada com sucesso!');
+    this.receitasService.cadastrarReceitas(novaReceita).subscribe(() => {
+      this.toastrService.showSuccess("Receita adicionada com sucesso!");
       this.fecharDialog();
     },
     (error) => {
-        this.toastrService.showError('Erro ao atualizar receita' + error);
+      this.toastrService.showError("Erro ao adicionar receita! " + error.error.message);
     });
   }
 
+  private atualizarReceita(id: number, item: Receitas): void {
+    this.receitasService.atualizarReceita(id, item).subscribe(
+      () => {
+        this.toastrService.showSuccess('Receita atualizada com sucesso!');
+        this.fecharDialog();
+      },
+      (error) => {
+        this.toastrService.showError('Erro ao atualizar receita' + error);
+      }
+    );
+  }
+
   private aoEditar(): void {
-    const data = this.data.item.data;
-    const dataConvertida = new Date(data).toLocaleString('pt-BR');
-    const dataOriginal = new Date(dataConvertida);
+    let data = this.data.item.data;
+    let dataConvertida = new Date(data).toLocaleString('pt-BR');
+    let dataOriginal = new Date(dataConvertida);
 
     this.formModal.setValue({
       data: dataOriginal,
@@ -109,9 +112,8 @@ export class ModalComponent implements OnInit {
     let dados = {
       data: this.formModal.get('data')?.value,
       descricao: this.formModal.get('descricao')?.value,
-      valor: this.formModal.get('valor')?.value
-    }
+      valor: this.formModal.get('valor')?.value,
+    };
     this.matDialogRef.close(dados);
   }
-
 }

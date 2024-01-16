@@ -22,10 +22,21 @@ table {
   height: 35vh;
 }
 
+/* @media (max-width: 1110px) {
+  .align-button {
+    max-width: 190px;
+  }
+} */
 
 .align-button {
   margin-left: 80%;
   margin-top: 30px;
+}
+
+.botao {
+  display: flex;
+  justify-content: end;
+  border: 1px solid orange;
 }
 
 mat-card{
