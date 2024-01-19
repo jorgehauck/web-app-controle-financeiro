@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { ModalDelecaoComponent } from 'src/app/shared/components/modal-delecao/modal-delecao.component';
 
 @Component({
   selector: 'app-lista-receitas',
@@ -57,6 +58,18 @@ export class ListaReceitasComponent implements OnInit {
     );
   }
 
+  public addReceita(): void {
+    const dialogRef = this.dialog.open(ModalComponent, {
+      width: '40%',
+      enterAnimationDuration: '1000ms',
+      exitAnimationDuration: '1000ms',
+      data: { title: 'Adicionar Receita' },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) this.getReceitas();
+    });
+  }
 
   public editReceita(item: Receitas): void {
     const dialogRef = this.dialog.open(ModalComponent, {
@@ -73,21 +86,24 @@ export class ListaReceitasComponent implements OnInit {
     });
   }
 
-  // public abrirModalDelecao(item: Receitas): void {
-  //   const modalRef = this.modalService.open(ModalConfirmacaoComponent);
-  //   modalRef.componentInstance.name = "";
-  // }
-
-  public addReceita(): void {
-    const dialogRef = this.dialog.open(ModalComponent, {
-      width: '40%',
+  public deleteReceita(item: Receitas): void {
+    console.log("ITEM: ", item);
+    const dialogRef = this.dialog.open(ModalDelecaoComponent, {
       enterAnimationDuration: '1000ms',
       exitAnimationDuration: '1000ms',
-      data: { title: 'Adicionar Receita' },
+      data: 'Realmente deseja excluir a receita?',
     });
 
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result) this.getReceitas();
+    dialogRef.afterClosed().subscribe((result: boolean) => {
+      if (result) {
+        this.receitasService.deletarReceita(item.id).subscribe(() => {
+          this.toastService.showSuccess("Receita removida com sucesso!");
+          this.getReceitas();
+        },
+        (error) => {
+          this.toastService.showError("Erro ao tentar remover receita: "+ error.error.message);
+        })
+      }
     });
   }
 }

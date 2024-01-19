@@ -23,8 +23,6 @@ export class ModalComponent implements OnInit {
 
   receitas!: Receitas;
 
-  tituloModal!: string;
-
   constructor(
     private toastrService: ToastService,
     private matDialogRef: MatDialogRef<ModalComponent>,
@@ -53,6 +51,7 @@ export class ModalComponent implements OnInit {
         data: dataReceita,
       };
       this.atualizarReceita(updateReceita.id, updateReceita);
+      return;
     }
     this.createReceita();
   }
