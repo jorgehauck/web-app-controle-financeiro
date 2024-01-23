@@ -2,12 +2,12 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Receitas } from 'src/app/model/Receitas';
 import { ReceitasService } from 'src/app/services/receitas/receitas.service';
 import { ToastService } from 'src/app/services/toast.service';
-import { ModalComponent } from 'src/app/pages/lista-receitas/modal/modal.component';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ModalDelecaoComponent } from 'src/app/shared/components/modal-delecao/modal-delecao.component';
+import { ModalComponent } from 'src/app/shared/components/modal/modal.component';
+
 
 @Component({
   selector: 'app-lista-receitas',
@@ -87,7 +87,6 @@ export class ListaReceitasComponent implements OnInit {
   }
 
   public deleteReceita(item: Receitas): void {
-    console.log("ITEM: ", item);
     const dialogRef = this.dialog.open(ModalDelecaoComponent, {
       enterAnimationDuration: '1000ms',
       exitAnimationDuration: '1000ms',
