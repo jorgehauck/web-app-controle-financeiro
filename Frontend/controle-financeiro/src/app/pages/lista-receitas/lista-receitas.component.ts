@@ -7,6 +7,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { ModalDelecaoComponent } from 'src/app/shared/components/modal-delecao/modal-delecao.component';
 import { ModalComponent } from 'src/app/shared/components/modal/modal.component';
+import { DatePipe } from '@angular/common';
 
 
 @Component({
@@ -66,8 +67,19 @@ export class ListaReceitasComponent implements OnInit {
       data: { title: 'Adicionar Receita' },
     });
 
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result) this.getReceitas();
+    dialogRef.afterClosed().subscribe((result: any) => {
+      if (result.tipoOperacao === 'insercao') {
+        let dataFormatada = new DatePipe('pt-BR').transform(result.data,'dd/MM/yyyy');
+
+        const novaReceita = {
+          data: dataFormatada,
+          valor: result.valor,
+          descricao: result.descricao,
+        } as Receitas;
+        console.log("NOVA RECEITA: ", novaReceita);
+        // this.createReceita(novaReceita);
+
+      }
     });
   }
 
@@ -79,9 +91,17 @@ export class ListaReceitasComponent implements OnInit {
       data: { title: 'Editar Receita', item: item },
     });
 
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        this.getReceitas();
+    dialogRef.afterClosed().subscribe((result: any) => {
+      if (result.tipoOperacao === 'edicao') {
+        let dataReceita = new DatePipe('pt-BR').transform(result.data, 'dd/MM/yyyy');
+        let receita: Receitas;
+        receita = {
+          id: result.id,
+          data: dataReceita,
+          descricao: result.descricao,
+          valor: result.valor
+        }
+        this.atualizarReceita(result.id, receita);
       }
     });
   }
@@ -95,7 +115,7 @@ export class ListaReceitasComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result: boolean) => {
       if (result) {
-        this.receitasService.deletarReceita(item.id).subscribe(() => {
+          this.receitasService.deletarReceita(item.id).subscribe(() => {
           this.toastService.showSuccess("Receita removida com sucesso!");
           this.getReceitas();
         },
@@ -104,5 +124,27 @@ export class ListaReceitasComponent implements OnInit {
         })
       }
     });
+  }
+
+  private createReceita(receita: Receitas): void {
+    this.receitasService.cadastrarReceitas(receita).subscribe(() => {
+      this.toastService.showSuccess("Receita adicionada com sucesso!");
+      this.getReceitas();
+    },
+    (error) => {
+      this.toastService.showError("Erro ao adicionar receita! " + error.error.message);
+    });
+  }
+
+  private atualizarReceita(id: number, item: Receitas): void {
+    this.receitasService.atualizarReceita(id, item).subscribe(
+      () => {
+        this.toastService.showSuccess('Receita atualizada com sucesso!');
+        this.getReceitas();
+      },
+      (error) => {
+        this.toastService.showError('Erro ao atualizar receita' + error.error.message);
+      }
+    );
   }
 }
