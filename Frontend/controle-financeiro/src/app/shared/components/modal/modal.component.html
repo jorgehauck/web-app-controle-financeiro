@@ -4,7 +4,7 @@
 
     <mat-form-field class="full-width" appearance="fill">
       <mat-label>Descrição</mat-label>
-      <input formControlName="descricao" matInput />
+      <input formControlName="descricao" class="upper-case-input" matInput />
     </mat-form-field>
 
     <mat-error *ngIf="formModal.get('descricao')?.errors?.['required'] && formModal.get('descricao')?.touched">
@@ -13,7 +13,7 @@
 
      <mat-form-field class="full-width" appearance="fill">
         <mat-label>Valor (R$)</mat-label>
-        <input matInput formControlName="valor" mask="separator.2" thousandSeparator="."/>
+        <input matInput formControlName="valor"/>
      </mat-form-field>
 
      <mat-error *ngIf="formModal.get('valor')?.errors?.['required'] && formModal.get('valor')?.touched">

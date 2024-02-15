@@ -21,6 +21,8 @@ button{
   width: 100% !important;
 }
 
-
+.upper-case-input {
+  text-transform: uppercase;
+}
 
 

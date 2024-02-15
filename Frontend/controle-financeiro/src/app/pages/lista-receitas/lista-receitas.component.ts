@@ -69,17 +69,15 @@ export class ListaReceitasComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result: any) => {
       if (result.tipoOperacao === 'insercao') {
-        let dataFormatada = new DatePipe('pt-BR').transform(result.data,'dd/MM/yyyy');
-
-        const novaReceita = {
-          data: dataFormatada,
-          valor: result.valor,
+        let dataReceita = new DatePipe('pt-BR').transform(result.data, 'dd/MM/yyyy') as string;
+        let receita = {
           descricao: result.descricao,
-        } as Receitas;
-        console.log("NOVA RECEITA: ", novaReceita);
-        // this.createReceita(novaReceita);
-
+          valor: result.valor,
+          data: dataReceita
+        } as Receitas
+        this.createReceita(receita);
       }
+
     });
   }
 

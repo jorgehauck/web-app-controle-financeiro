@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
+
 @Component({
   selector: 'app-modal',
   templateUrl: './modal.component.html',
@@ -42,14 +43,16 @@ export class ModalComponent implements OnInit {
   }
 
   public salvar(): void {
-    const result = {
-      id: this.data.item.id,
-      descricao: this.formModal.get('descricao')?.value,
-      valor: this.formModal.get('valor')?.value,
-      data: this.formModal.get('data')?.value,
-      tipoOperacao: this.data.item ? 'edicao' : 'insercao'
-    };
-    this.dialogRef.close(result);
+    if (this.formModal.valid) {
+      let result = {
+        id: this.data.item ? this.data.item.id : null,
+        descricao: this.formModal.get('descricao')?.value,
+        valor: this.formModal.get('valor')?.value,
+        data: this.formModal.get('data')?.value,
+        tipoOperacao: this.data.item ? 'edicao' : 'insercao'
+      }
+      this.dialogRef.close(result);
+    }
   }
 
 
