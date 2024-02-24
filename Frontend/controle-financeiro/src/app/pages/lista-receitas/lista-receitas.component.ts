@@ -5,9 +5,10 @@ import { ToastService } from 'src/app/services/toast.service';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { ModalDelecaoComponent } from 'src/app/shared/components/modal-delecao/modal-delecao.component';
-import { ModalComponent } from 'src/app/shared/components/modal/modal.component';
+
 import { DatePipe } from '@angular/common';
+import { ModalComponent } from './../../shared/components/modal/modal.component';
+import { ModalDelecaoComponent } from './../../shared/components/modal-delecao/modal-delecao.component';
 
 
 @Component({
@@ -23,7 +24,7 @@ export class ListaReceitasComponent implements OnInit {
 
   @ViewChild('paginator') paginator!: MatPaginator;
 
-  loadingReceitas: boolean = true;
+  public loadingReceitas: boolean = true;
 
   constructor(
     private receitasService: ReceitasService,

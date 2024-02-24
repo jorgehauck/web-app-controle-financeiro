@@ -1,0 +1,44 @@
+table {
+  width: 100%;
+}
+
+.action-column-header {
+  margin: 0 auto;
+}
+
+.mat-header-cell-centered {
+  text-align: center;
+}
+
+.input-filter {
+  margin-top: 30px !important;
+  width: 100%;
+}
+
+.loading-spinner {
+  background: rgba(0, 0, 0, 0.15);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 35vh;
+}
+
+.align-button {
+  margin-left: 80%;
+  margin-top: 30px;
+}
+
+.botao {
+  display: flex;
+  justify-content: end;
+  border: 1px solid orange;
+}
+
+mat-card{
+  margin: 2%;
+}
+
+button{
+  margin: 2px;
+}
+

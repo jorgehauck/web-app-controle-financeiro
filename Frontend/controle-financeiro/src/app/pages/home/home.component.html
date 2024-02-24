@@ -32,7 +32,7 @@
                     formGroup.get('senha')?.touched">
                   </app-mensagem>
 
-                  <button class="btn btn-primary mt-3" type="submit">Entrar</button>
+                  <button class="btn btn-primary mt-3" type="submit" [disabled]="formGroup.invalid">Entrar</button>
                 </form>
                 <p>Não possui uma conta? <a [routerLink]="['novo-usuario']">Cadastre-se</a></p>
 

@@ -17,6 +17,7 @@ import { ModalComponent } from './components/modal/modal.component';
     AngularMaterialModule,
     FormsModule,
     ReactiveFormsModule,
-    ModalDelecaoComponent]
+    ModalDelecaoComponent,
+    ModalComponent]
 })
 export class SharedModule { }
