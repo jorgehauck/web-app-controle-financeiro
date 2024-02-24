@@ -18,7 +18,7 @@ export class ListaDespesasComponent implements OnInit {
 
   despesas!: Array<Despesas>;
 
-  public displayedColumns: string[] = ['descricao', 'valor', 'data', 'acoes'];
+  public displayedColumns: string[] = ['descricao', 'valor', 'data', 'categoria', 'acoes'];
   public dataSource = new MatTableDataSource<Despesas>();
 
   @ViewChild('paginator') paginator!: MatPaginator;
@@ -44,6 +44,7 @@ export class ListaDespesasComponent implements OnInit {
     this.despesasService.getDespesas().subscribe(page => {
       this.despesas = page.content;
       this.dataSource.data = this.despesas;
+      console.log("DESPESAS: ", this.despesas);
 
       if (this.paginator) {
         this.dataSource.paginator = this.paginator;
